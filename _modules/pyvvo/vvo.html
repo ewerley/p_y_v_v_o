@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyvvo.vvo &mdash; pyvvo 0.9.5 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> pyvvo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyvvo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>pyvvo.vvo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyvvo.vvo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A class to perform Voltage-Var Optimization in Distribution Systems&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;../..&#39;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">pyvvo.powergrid</span> <span class="kn">import</span> <span class="n">Powergrid</span>
+<span class="kn">from</span> <span class="nn">pyvvo.loadflow</span> <span class="kn">import</span> <span class="n">Loadflow</span>
+<span class="kn">from</span> <span class="nn">pyvvo.report</span> <span class="kn">import</span> <span class="n">vvo_output</span>
+<span class="kn">from</span> <span class="nn">pyvvo.version</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">pyvvo_version</span>
+
+<div class="viewcode-block" id="Vvo"><a class="viewcode-back" href="../../pyvvo.html#pyvvo.vvo.Vvo">[docs]</a><span class="k">class</span> <span class="nc">Vvo</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A class to perform Voltage-Var Optimization in Distribution Systems</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvofile: `str`</span>
+<span class="sd">        Path to the main .vvo file with control definitions</span>
+<span class="sd">    sysfile: `str`, optional</span>
+<span class="sd">        Path to the associated .dss file with network data. If not provided,</span>
+<span class="sd">        a file with the same name as ``vvofile`` and a &#39;.dss&#39; extension</span>
+<span class="sd">        will be sought.        </span>
+<span class="sd">    grid : `powergrid`, default None</span>
+<span class="sd">       Power system model represented as a Powergrid object.</span>
+<span class="sd">       If should be provided in case ``sysfile`` is not given.</span>
+
+<span class="sd">    **Control structures**   </span>
+<span class="sd">    </span>
+<span class="sd">    capvvocontrol : `dict` [`str`, `dict`]</span>
+<span class="sd">        Capacitor control data. The keys `str` are the identifiers of the</span>
+<span class="sd">        controlled capacitors, as in ``pyvvo.grid.capacitor``. </span>
+<span class="sd">        Each subkey is a dictionary with the following control properties:</span>
+
+<span class="sd">        ``Maxkvar`` : `float`</span>
+<span class="sd">            Maximum kVar of the bank (total of all phases)</span>
+<span class="sd">        ``Numsteps`` : `int`</span>
+<span class="sd">            Number of steps in the capacitor bank.</span>
+
+<span class="sd">    trvvocontrol : `dict` [`str`, `dict`]</span>
+<span class="sd">        Transformer control data. The keys `str` are the identifiers of the</span>
+<span class="sd">        controlled transformers, as in ``pyvvo.grid.transformer``. </span>
+<span class="sd">        Each internal `dict` should have the following control properties:</span>
+
+<span class="sd">        ``MinTap`` : `float`</span>
+<span class="sd">            Minimum per unit tap    </span>
+<span class="sd">        ``MaxTap`` : `float`</span>
+<span class="sd">            Maximum per unit tap                </span>
+<span class="sd">        ``NumTaps`` : `int`</span>
+<span class="sd">            Total number of taps between min and max tap</span>
+
+<span class="sd">    invertervvocontrol : `dict` [`str`, `dict`]</span>
+<span class="sd">        Smart-inverter control data. The keys `str` are the identifiers of</span>
+<span class="sd">        the controlled generators, as in ``pyvvo.grid.generator``</span>
+<span class="sd">        Each `dict` subkey should have the following control properties:</span>
+<span class="sd">        </span>
+<span class="sd">        ``MinPF`` : `float`</span>
+<span class="sd">            Minimum power factor allowed at the generation point.</span>
+<span class="sd">        ``MaxPF`` : `float`</span>
+<span class="sd">            Maximum power factor allowed at the generation point.</span>
+<span class="sd">        ``Maxkva`` : `float`</span>
+<span class="sd">            Maximum kvA at the generation point.</span>
+
+<span class="sd">    **Internal attributes**       </span>
+
+<span class="sd">    __version__ : `str`</span>
+<span class="sd">        Current version of the Vvo package.</span>
+<span class="sd">    optimizer : </span>
+<span class="sd">        Reference to the external optimizer object.</span>
+<span class="sd">    lf : `pyvvo.loadflow.Loadflow`</span>
+<span class="sd">        Reference to the internal loadflow object.</span>
+<span class="sd">    penalties : `list` [ `str` ] or `dict`</span>
+<span class="sd">        A list of optimization penalties. See `pyvvo.Vvo.optimize`.</span>
+<span class="sd">    discretization : `str`, by default None</span>
+<span class="sd">        Discretization strategy passed to the solver.</span>
+<span class="sd">    nc : `int`</span>
+<span class="sd">        Number of controls.</span>
+<span class="sd">    ncap : `int`</span>
+<span class="sd">        Number of capacitor controls.</span>
+<span class="sd">    ntr : `int`</span>
+<span class="sd">        Number of transformer controls.</span>
+<span class="sd">    ninv : `int`</span>
+<span class="sd">        Number of smart-inverter controls.</span>
+
+<span class="sd">    u : `list` [ `float` ]</span>
+<span class="sd">        Actual values of the control variables, (nc, 1).</span>
+<span class="sd">    umin : `list` [ `float` ]</span>
+<span class="sd">        Lower limit of each control variable, (nc, 1).</span>
+<span class="sd">    umax : `list` [ `float` ]</span>
+<span class="sd">        Upper limit of each control variable, (nc, 1).</span>
+<span class="sd">    ustep : `list` [ `float` ]</span>
+<span class="sd">        Step-size of each control variable of discrete type, (nc, 1).</span>
+<span class="sd">    uid : `list` [ `list` ], (nc, 4)</span>
+<span class="sd">        List of properties of each control variable, as following:</span>
+
+<span class="sd">        type : {&#39;capacitor&#39;, &#39;transformer&#39;, &#39;generator&#39;}</span>
+<span class="sd">            Type of the controlled equipment.</span>
+<span class="sd">        id_ : `str`</span>
+<span class="sd">            Identifier of the equipment</span>
+<span class="sd">        varname : `str`</span>
+<span class="sd">            name of the controlled parameter            </span>
+<span class="sd">        ph  : `int`</span>
+<span class="sd">            number of phases (not currently used)</span>
+<span class="sd">               </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vvofile</span><span class="p">,</span> <span class="n">sysfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vvofile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">vvofile</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sysfile</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sysfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">sysfile</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sysfile</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># reference to the external solution method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trvvocontrol</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capvvocontrol</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invertervvocontrol</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        
+        <span class="c1"># Control vectors</span>
+        <span class="c1"># Global variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># control value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># device identifier</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">umax</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># maximum control value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">umin</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># minimum control value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ustep</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># minimum control value</span>
+
+        <span class="c1"># Capacitor variables (specification of the u controls above)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucap_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_step</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        
+        <span class="c1"># Transformers variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utr_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_step</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="c1"># Smart inverter variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qstep</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_max</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_max</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nc</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># number of controls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncap</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ntr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ninv</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">penalties</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># string array</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__version__</span> <span class="o">=</span> <span class="n">pyvvo_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discretization</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># discretization strategy adopted</span>
+
+        <span class="n">vvo_basename</span><span class="p">,</span> <span class="n">vvo_extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vvofile</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">vvo_extension</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vvofile</span> <span class="o">+=</span> <span class="s1">&#39;.vvo&#39;</span>
+        <span class="k">elif</span> <span class="n">vvo_extension</span> <span class="o">!=</span> <span class="s1">&#39;.vvo&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vvo: vvo file extension &#39;</span><span class="p">,</span> <span class="n">vvo_extension</span><span class="p">,</span> <span class="s1">&#39;not recognized&#39;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sysfile</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Powergrid</span><span class="o">.</span><span class="n">fromdss</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sysfile</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Powergrid</span><span class="o">.</span><span class="n">fromdss</span><span class="p">(</span><span class="n">vvo_basename</span> <span class="o">+</span> <span class="s1">&#39;.dss&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readVvo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vvofile</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf</span> <span class="o">=</span> <span class="n">Loadflow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf</span><span class="o">.</span><span class="n">loadflow</span><span class="p">()</span> <span class="c1"># base case</span>
+        <span class="c1">#self.grid.Losses()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">voltageDeviation</span><span class="p">()</span>
+   
+    
+<div class="viewcode-block" id="Vvo.optimize"><a class="viewcode-back" href="../../pyvvo.html#pyvvo.vvo.Vvo.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="s1">&#39;min_losses&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;PSO&#39;</span><span class="p">,</span> 
+                 <span class="n">penalties</span><span class="o">=</span><span class="s1">&#39;v-load, kvar-cap, tap, fp-inv, kva-inv&#39;</span><span class="p">,</span>
+                 <span class="n">reports</span><span class="o">=</span><span class="s1">&#39;info, base, solver, opt&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform the VVO optimization</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        goal : {&#39;min_losses&#39;, &#39;min_dv&#39;}, by default &#39;min_losses&#39;</span>
+<span class="sd">            Optimization goal, whether Losses or Voltage-deviation minimization.</span>
+<span class="sd">        method : {&#39;PSO&#39;}, by default &#39;PSO&#39;</span>
+<span class="sd">            Solution method (solver).</span>
+<span class="sd">        penalties : `str` or `dict`</span>
+<span class="sd">            A list of commad-separated penalty types to apply in the Vvo </span>
+<span class="sd">            optimization process. Each penalty is associated with a specific</span>
+<span class="sd">            optimization constraint, as following:</span>
+
+<span class="sd">            - ``v-load`` : minimum/maximum voltage magnitude of the loads</span>
+<span class="sd">            - ``kvar-cap`` : minimum/maximum capacitors&#39; kVar</span>
+<span class="sd">            - ``tap`` : transformers&#39; lower and upper tap limits</span>
+<span class="sd">            - ``fp-inv`` : minimum/maximum power factor of the inverter connection</span>
+<span class="sd">            - ``kva-inv`` : maximum kVa generated at the inverter connection           </span>
+
+<span class="sd">            The default penalty factor for all penalties is 1e5, except for the</span>
+<span class="sd">            ``tap`` penalty, whith has a factor of 1e6.</span>
+<span class="sd">            If a `dict` is provided, the penalty factors are taken from the</span>
+<span class="sd">            dictionary values.</span>
+
+<span class="sd">        reports : `list` [ `str` ]</span>
+<span class="sd">            A list of reports to print. The following types are available:</span>
+
+<span class="sd">            - ``info`` : System information.</span>
+
+<span class="sd">            - ``base_controls`` : Controls adjustments and objective function</span>
+<span class="sd">              of the base-case</span>
+<span class="sd">            - ``base_voltages`` : Base-case full voltage report</span>
+<span class="sd">            - ``base`` : Synonym for ``&#39;base_controls, base_voltages&#39;``</span>
+<span class="sd">            - ``base_loads`` : Base-case load report</span>
+<span class="sd">            - ``base_vchart`` : Base-case voltages chart.            </span>
+<span class="sd">            - ``base_flows`` : Base-case power flow report.</span>
+<span class="sd">            </span>
+<span class="sd">            - ``solver_progress`` : Solver progress report</span>
+<span class="sd">            - ``solver_output`` : Solver output report</span>
+<span class="sd">            - ``solver`` : Synonym for &#39;``solver_progress``, ``solver_progress``&#39;</span>
+
+<span class="sd">            - ``opt_controls`` : Optimal controls and objective function </span>
+<span class="sd">            - ``constraints`` : Constraints report</span>
+<span class="sd">            - ``opt_voltages`` : Voltage report at the optimal solution</span>
+<span class="sd">            - ``opt_flows`` : Power flow report at the optimal solution</span>
+<span class="sd">            - ``fitness_plot`` : Objective function along the iteration process.</span>
+<span class="sd">            - ``opt_vchart`` : Optimal voltage chart.</span>
+<span class="sd">            - ``opt`` : Synonym for &#39;``opt_controls``, ``constraints``, ``opt_voltages``,</span>
+<span class="sd">              ``opt_flows``, ``fitness_plot``, ``opt_vchart``&#39;</span>
+
+<span class="sd">        **options : </span>
+<span class="sd">            Aditional keyworded arguments passed to the solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal</span> <span class="o">=</span> <span class="n">goal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">penalties</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>     
+            <span class="n">penalties</span> <span class="o">=</span> <span class="n">penalties</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e5</span><span class="p">]</span><span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">penalties</span><span class="p">)</span>
+            <span class="n">penalties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">penalties</span><span class="p">,</span> <span class="n">factors</span><span class="p">))</span>
+            <span class="k">if</span> <span class="s1">&#39;tap&#39;</span> <span class="ow">in</span> <span class="n">penalties</span><span class="p">:</span>
+                <span class="n">penalties</span><span class="p">[</span><span class="s1">&#39;tap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">penalties</span> <span class="o">=</span> <span class="n">penalties</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">penalty_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">penalties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">penalty_coeffs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">penalties</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reports</span> <span class="o">=</span> <span class="n">reports</span> <span class="o">=</span> <span class="n">reports</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;discretization&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">discretization</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;discretization&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;PSO&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pyvvo.optimizers.pso</span> <span class="kn">import</span> <span class="n">Pso</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opt</span> <span class="o">=</span> <span class="n">Pso</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s1">&#39;solver&#39;</span> <span class="ow">or</span> <span class="s1">&#39;solver_progress&#39;</span> <span class="ow">in</span> <span class="n">reports</span><span class="p">:</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;show_progress&#39;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">})</span>            
+            <span class="k">if</span> <span class="s1">&#39;solver&#39;</span> <span class="ow">or</span> <span class="s1">&#39;solver_output&#39;</span> <span class="ow">in</span> <span class="n">reports</span><span class="p">:</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;report&#39;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">})</span>                                
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error in Vvo.optimize: only the &#39;PSO&#39; method is currently implemented.&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clearControls</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fillControls</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ubase</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="c1"># base-case control values        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ofbase</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evalFitness</span><span class="p">()</span>       
+
+        <span class="n">vvo_output</span><span class="o">.</span><span class="n">info_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reports</span><span class="p">)</span>
+        <span class="n">vvo_output</span><span class="o">.</span><span class="n">base_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reports</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">fitnessfunc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_objectiveFunc</span><span class="p">,</span> 
+                          <span class="n">xmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">umin</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">umax</span><span class="p">,</span> <span class="n">xstep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ustep</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">gbest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">of_opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">gbest_fitness</span>
+
+        <span class="n">vvo_output</span><span class="o">.</span><span class="n">optimal_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reports</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Vvo.readVvo"><a class="viewcode-back" href="../../pyvvo.html#pyvvo.vvo.Vvo.readVvo">[docs]</a>    <span class="k">def</span> <span class="nf">readVvo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vvofile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read the OPF data from a .vvo file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vvofile : `str`</span>
+<span class="sd">            Path of the .vvo file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vvofile</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>             
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/\*(.|[</span><span class="se">\r\n</span><span class="s2">])*?\*/&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># removing multi-line comments            </span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;(!|//).*&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># removing single-line comments</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">\s*</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># removing blank lines</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;^</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># removing empty line</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;  +&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># removing repetitive spaces</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">~&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span> <span class="c1"># handling multi-line commands</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\s*=\s*&#39;</span><span class="p">,</span><span class="s1">&#39;=&#39;</span><span class="p">,</span><span class="n">contents</span><span class="p">)</span> <span class="c1"># removing spaces around =</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; ([a-zA-Z0-9%]*)=&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;, \1=&quot;</span><span class="p">,</span><span class="n">contents</span><span class="p">)</span> <span class="c1"># adding commas before property names            </span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># creating string array</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;new&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;object=&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># Stripping &#39;New &#39; and (possible) &#39;object=&#39; string</span>
+                    <span class="n">sep</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+                    <span class="n">parameters</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">sep</span><span class="p">]</span>
+                    <span class="n">Classname</span><span class="p">,</span> <span class="n">objname</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+                    <span class="n">Classname</span> <span class="o">=</span> <span class="n">Classname</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1"># making Classname lowercase !!</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">sep</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">properties</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">properties</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span>                    
+                    <span class="n">properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="c1"># converting keys to lowercase</span>
+                    <span class="k">if</span> <span class="n">Classname</span> <span class="o">==</span> <span class="s1">&#39;capvvocontrol&#39;</span><span class="p">:</span> 
+                        <span class="k">if</span> <span class="n">objname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">capacitor</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in ReadVvo (capvvocontrol): object&#39;</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="s1">&#39;not defined in the capacitor data.&#39;</span><span class="p">)</span>
+                            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">capvvocontrol</span><span class="p">[</span><span class="n">objname</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span> <span class="c1"># Load</span>
+                    <span class="k">elif</span> <span class="n">Classname</span> <span class="o">==</span> <span class="s1">&#39;trvvocontrol&#39;</span><span class="p">:</span> 
+                        <span class="k">if</span> <span class="n">objname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">transformer</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in ReadVvo (trvvocontrol): object&#39;</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="s1">&#39;not defined in the transformer data.&#39;</span><span class="p">)</span>
+                            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        
+                        <span class="bp">self</span><span class="o">.</span><span class="n">trvvocontrol</span><span class="p">[</span><span class="n">objname</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span> <span class="c1"># Load  </span>
+                    <span class="k">elif</span> <span class="n">Classname</span> <span class="o">==</span> <span class="s1">&#39;invertervvocontrol&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">objname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">generator</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in ReadVvo (invertervvocontrol): object&#39;</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="s1">&#39;not defined in the generator data.&#39;</span><span class="p">)</span>
+                            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                        
+                        <span class="bp">self</span><span class="o">.</span><span class="n">invertervvocontrol</span><span class="p">[</span><span class="n">objname</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span> <span class="c1"># Load  </span></div>
+
+    <span class="k">def</span> <span class="nf">_clearControls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset the state of the control variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">umax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ustep</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>        
+        <span class="c1"># Capacitor variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucap_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_step</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>       
+        <span class="c1"># Transformers variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utr_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_step</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="c1"># Smart inverter variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qstep</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_max</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_max</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncap</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ntr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ninv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>                        
+
+    <span class="k">def</span> <span class="nf">_fillControls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fill the internal state of the control variables based on the vvo data</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="c1"># Capacitor controls</span>
+        <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">capvvocontrol</span><span class="p">:</span>
+            <span class="c1"># TODO: implement multi-phase cap</span>
+            <span class="n">cap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">capacitor</span><span class="p">[</span><span class="n">id_</span><span class="p">]</span>
+            <span class="n">cap</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capvvocontrol</span><span class="p">[</span><span class="n">id_</span><span class="p">])</span> <span class="c1"># append control keys to cap</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">cap</span><span class="p">[</span><span class="s1">&#39;kvar&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ucap_max</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">cap</span><span class="p">[</span><span class="s1">&#39;maxkvar&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ucap_min</span> <span class="o">+=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ucap_step</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">cap</span><span class="p">[</span><span class="s1">&#39;maxkvar&#39;</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">cap</span><span class="p">[</span><span class="s1">&#39;numsteps&#39;</span><span class="p">])]</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">ucap_id</span> <span class="o">+=</span> <span class="p">[[</span><span class="s1">&#39;capacitor&#39;</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="s1">&#39;kvar&#39;</span><span class="p">,</span> <span class="n">cap</span><span class="p">[</span><span class="s1">&#39;phases&#39;</span><span class="p">]]]</span> <span class="c1"># TODO: improve phase location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncap</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ucap</span><span class="p">)</span>
+
+        <span class="c1"># Transformer controls    </span>
+        <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trvvocontrol</span><span class="p">:</span>
+            <span class="c1"># TODO: implement multi-phase transformer</span>
+            <span class="n">tr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">transformer</span><span class="p">[</span><span class="n">id_</span><span class="p">]</span>
+            <span class="n">tr</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trvvocontrol</span><span class="p">[</span><span class="n">id_</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">utr</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;taps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])]</span> <span class="c1"># secondary tap</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">utr_max</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;maxtap&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">utr_min</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;mintap&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">utr_step</span> <span class="o">+=</span> <span class="p">[(</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;maxtap&#39;</span><span class="p">])</span><span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;mintap&#39;</span><span class="p">]))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s1">&#39;numtaps&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">utr_id</span> <span class="o">+=</span> <span class="p">[[</span><span class="s1">&#39;transformer&#39;</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="n">tr</span><span class="p">[</span><span class="s1">&#39;phases&#39;</span><span class="p">]]]</span> <span class="c1"># TODO: improve phase location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ntr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utr</span><span class="p">)</span>
+
+        <span class="c1"># Smart inverter</span>
+        <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">invertervvocontrol</span><span class="p">:</span>
+            <span class="c1"># TODO: implement multi-phase transformer</span>
+            <span class="n">inv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">generator</span><span class="p">[</span><span class="n">id_</span><span class="p">]</span>
+            <span class="n">inv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">invertervvocontrol</span><span class="p">[</span><span class="n">id_</span><span class="p">])</span>
+            <span class="n">maxpf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;maxpf&#39;</span><span class="p">])</span>
+            <span class="n">minpf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;minpf&#39;</span><span class="p">])</span>
+            <span class="n">kvar</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;kvar&#39;</span><span class="p">])</span>
+            <span class="n">kw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;kw&#39;</span><span class="p">])</span>
+            <span class="c1"># pf = float(inv[&#39;kw&#39;])/((float(inv[&#39;kw&#39;])**2 + float(inv[&#39;kvar&#39;])**2))**0.5</span>
+            <span class="c1"># self.uinv_fp += [pf] # secondary tap</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_max</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;maxpf&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_min</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;minpf&#39;</span><span class="p">])]</span>
+            <span class="c1"># self.uinv_fp_step += [None] # continuous variable</span>
+            <span class="c1"># self.uinv_fp_id += [[&#39;generator&#39;, id_, &#39;fp&#39;, inv[&#39;phases&#39;]]] # TODO: improve phase location</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kvar</span><span class="p">]</span> <span class="c1"># secondary tap</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_p</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kw</span><span class="p">]</span> <span class="c1"># also storing p</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmin</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kw</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">maxpf</span><span class="p">))]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmax</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kw</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">minpf</span><span class="p">))]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_max</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kw</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;minpf&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_min</span> <span class="o">+=</span> <span class="p">[</span><span class="n">kw</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;maxpf&#39;</span><span class="p">])]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qstep</span> <span class="o">+=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="c1"># continuous variable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q_id</span> <span class="o">+=</span> <span class="p">[[</span><span class="s1">&#39;generator&#39;</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="s1">&#39;kvar&#39;</span><span class="p">,</span> <span class="n">inv</span><span class="p">[</span><span class="s1">&#39;phases&#39;</span><span class="p">]]]</span> <span class="c1"># TODO: improve phase location</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ninv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span><span class="p">)</span>        
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_id</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_id</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">umax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_max</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_max</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">umin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_min</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_min</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qmin</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">ustep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucap_step</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">utr_step</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_qstep</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ntr</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncap</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ninv</span>
+
+<div class="viewcode-block" id="Vvo.addControl"><a class="viewcode-back" href="../../pyvvo.html#pyvvo.vvo.Vvo.addControl">[docs]</a>    <span class="k">def</span> <span class="nf">addControl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">**</span><span class="n">properties</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a vvo control</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        type : {&#39;capvvocontrol&#39;, &#39;trvvocontrol&#39;, &#39;invertervvocontrol&#39;}</span>
+<span class="sd">            Vvo control type.</span>
+<span class="sd">        key : `str`</span>
+<span class="sd">            Identifier of the controlled equipment.</span>
+<span class="sd">        **properties : `dict`</span>
+<span class="sd">            Control properties.</span>
+<span class="sd">            See ``capvvocontrol``, ``trvvocontrol`` and ``inverter``.                        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;capvvocontrol&#39;</span><span class="p">,</span> <span class="s1">&#39;trvvocontrol&#39;</span><span class="p">,</span> <span class="s1">&#39;invertervvocontrol&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error in AddControl: unknwon control type&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">properties</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="c1"># converting keys to lowercase</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;capvvocontrol&#39;</span><span class="p">:</span> 
+            <span class="n">device_type</span> <span class="o">=</span> <span class="s1">&#39;capacitor&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;trvvocontrol&#39;</span><span class="p">:</span> 
+            <span class="n">device_type</span> <span class="o">=</span> <span class="s1">&#39;transformer&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;invertervvocontrol&#39;</span><span class="p">:</span> 
+            <span class="n">device_type</span> <span class="o">=</span> <span class="s1">&#39;generator&#39;</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.grid.&#39;</span> <span class="o">+</span> <span class="n">device_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">device</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in add Control (&#39;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s1">&#39;): object&#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;not defined in the &#39;</span> <span class="o">+</span> <span class="n">device_type</span> <span class="o">+</span> <span class="s1">&#39; data.&#39;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.&#39;</span> <span class="o">+</span> <span class="nb">type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">control</span><span class="p">:</span>
+            <span class="n">control</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">control</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span> <span class="c1"># Load  </span></div>
+
+
+    <span class="k">def</span> <span class="nf">_updateControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the internal control variables from an external control array</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        u : `list` [ `float` ], dimension nc</span>
+<span class="sd">            External control array</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">utr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nc</span><span class="p">):</span>
+            <span class="nb">type</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">varname</span><span class="p">,</span> <span class="n">ph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">udpateParam</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">varname</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;transformer&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">utr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;capacitor&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ucap</span> <span class="o">+=</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;generator&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span> <span class="o">+=</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>                                
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">u</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ntr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># if there are transformer controls, recalculate the voltage base</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">calc_Vbase</span><span class="p">()</span>      
+    
+    <span class="k">def</span> <span class="nf">_objectiveFunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the objective function of a control array.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        u : `list` [ `float` ]</span>
+<span class="sd">            Array of control variables, (nc, 1).</span>
+<span class="sd">       </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        obj_func_value : `float`</span>
+<span class="sd">            The value of the objective function (the summation of the fitness</span>
+<span class="sd">            and penalties)</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        In case there is no load flow solution for a given control array,</span>
+<span class="sd">        the objective function of the base-case control variables are returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updateControls</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">convergence_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lf</span><span class="o">.</span><span class="n">loadflow</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">convergence_status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ofbase</span>
+
+        <span class="n">fitness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evalFitness</span><span class="p">()</span>
+        <span class="n">sum_penalties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evalPenalties</span><span class="p">()</span>
+        <span class="n">obj_func_value</span> <span class="o">=</span>  <span class="n">fitness</span> <span class="o">+</span> <span class="n">sum_penalties</span>
+
+        <span class="k">return</span> <span class="n">obj_func_value</span>
+
+    <span class="k">def</span> <span class="nf">_evalFitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluate the fitness function</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        goal : `str`, optional</span>
+<span class="sd">            Optimization goal. If None, `self.goal` is used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fitness : `float`</span>
+<span class="sd">            Fitness value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>         
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">goal</span><span class="p">:</span>
+            <span class="n">goal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span>
+        <span class="k">if</span> <span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
+            <span class="n">fitness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lf</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">real</span>
+        <span class="k">elif</span> <span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">voltageDeviation</span><span class="p">()</span>
+            <span class="n">fitness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Vdev</span>
+        <span class="k">return</span> <span class="n">fitness</span>
+
+    <span class="k">def</span> <span class="nf">_evalPenalties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluate the penalties</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sum_penalties : `float`</span>
+<span class="sd">            Summation of all penalty values.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The penalty evaluation checks the value of each control of the ``u`` vector</span>
+<span class="sd">        agains the minimum and maximum limites. In case of limits violation, a penalty</span>
+<span class="sd">        considering the squared difference between the current control value and the</span>
+<span class="sd">        violated limit is computed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">penalties</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.</span>
+
+        <span class="n">penalty_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">penalty_types</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">penalty_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">penalty_types</span><span class="p">):</span>
+            <span class="n">penalty_name</span> <span class="o">=</span> <span class="n">penalty_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">penalty_name</span> <span class="o">==</span> <span class="s1">&#39;kvar-cap&#39;</span><span class="p">:</span>
+                <span class="n">u</span><span class="p">,</span> <span class="n">umin</span><span class="p">,</span> <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ucap</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ucap_min</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ucap_max</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">penalty_name</span> <span class="o">==</span> <span class="s1">&#39;tap&#39;</span><span class="p">:</span>
+                <span class="n">u</span><span class="p">,</span> <span class="n">umin</span><span class="p">,</span> <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utr</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utr_min</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utr_max</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">penalty_name</span> <span class="o">==</span> <span class="s1">&#39;v-load&#39;</span><span class="p">:</span>
+                <span class="n">u</span><span class="p">,</span> <span class="n">umin</span><span class="p">,</span> <span class="n">umax</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">:</span>
+                    <span class="n">bus</span><span class="p">,</span> <span class="o">*</span><span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="c1"># stripping bus string</span>
+                    <span class="n">vminpu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;vminpu&#39;</span><span class="p">])</span>
+                    <span class="n">vmaxpu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;vmaxpu&#39;</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="n">node</span><span class="p">]</span> <span class="c1"># position of node in node list</span>
+                        <span class="n">Vk</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="c1"># voltage magnitude in pu</span>
+                        <span class="n">u</span> <span class="o">+=</span> <span class="p">[</span><span class="n">Vk</span><span class="p">]</span>
+                        <span class="n">umin</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vminpu</span><span class="p">]</span>
+                        <span class="n">umax</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vmaxpu</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">,</span> <span class="n">umin</span><span class="p">,</span> <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">umin</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">umax</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">penalty_name</span> <span class="o">==</span> <span class="s1">&#39;fp-inv&#39;</span><span class="p">:</span>
+                <span class="n">umin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_min</span><span class="p">)</span>
+                <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_pf_max</span><span class="p">)</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinv_p</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="n">penalty_name</span> <span class="o">==</span> <span class="s1">&#39;kva-inv&#39;</span><span class="p">:</span>
+                <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_max</span><span class="p">)</span>
+                <span class="n">umin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_kva_min</span><span class="p">)</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uinv_q</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                
+            <span class="n">controls_penalties</span> <span class="o">=</span> <span class="p">((</span><span class="n">u</span> <span class="o">&gt;</span> <span class="n">umax</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">umax</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">u</span> <span class="o">&lt;</span> <span class="n">umin</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">umin</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">penalty_array</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">penalty_coeffs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">controls_penalties</span><span class="o">/</span><span class="p">(</span><span class="n">umax</span><span class="o">-</span><span class="n">umin</span><span class="p">))</span>
+
+        <span class="n">sum_penalties</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">penalty_array</span><span class="p">)</span>        
+        <span class="k">return</span> <span class="n">sum_penalties</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

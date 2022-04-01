@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyvvo.optimizers.pso.pso &mdash; pyvvo 0.9.5 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> pyvvo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">pyvvo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>pyvvo.optimizers.pso.pso</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyvvo.optimizers.pso.pso</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span>
+
+<div class="viewcode-block" id="Pso"><a class="viewcode-back" href="../../../../pyvvo.optimizers.pso.html#pyvvo.optimizers.pso.pso.Pso">[docs]</a><span class="k">class</span> <span class="nc">Pso</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A Python class for the PSO optmizer</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    c1 : `float`, by default 1.</span>
+<span class="sd">        Learning (cognitive) parameter</span>
+<span class="sd">    c2 : `float`, by default 1.5</span>
+<span class="sd">        Global learning (social) parameter</span>
+<span class="sd">    wmin : `float`, by default 0.3</span>
+<span class="sd">        Minimum weight</span>
+<span class="sd">    wmax : `float`, by default 0.9</span>
+<span class="sd">        Maximum weight </span>
+
+<span class="sd">    **General attributes**</span>
+
+<span class="sd">    npart : `int`</span>
+<span class="sd">        Number of particles</span>
+<span class="sd">    dim : `int`</span>
+<span class="sd">        Problem&#39;s dimension</span>
+<span class="sd">    x : `numpy.ndarray`, (npart, dim)</span>
+<span class="sd">        Position vector of the population</span>
+<span class="sd">    v : `numpy.ndarray`, (npart, dim)</span>
+<span class="sd">        Velocity vector of the population</span>
+<span class="sd">    w : `float`</span>
+<span class="sd">        Velocity weight</span>
+<span class="sd">    xbest : `numpy.ndarray`, (npart, dim)</span>
+<span class="sd">        Best position vector of each particle</span>
+<span class="sd">    xbest_fitness : `numpy.ndarray`, (npart, 1) </span>
+<span class="sd">        Fitness value of xbest        </span>
+<span class="sd">    gbest : `numpy.ndarray`, (npart, 1)</span>
+<span class="sd">        Best position vector among all particles (global best)</span>
+<span class="sd">    gbest_fitness : `float` </span>
+<span class="sd">        Fitness value of the global best</span>
+<span class="sd">    gbest_fitness : `numpy.ndarray`, (itermax, 1)</span>
+<span class="sd">        Fitness value of the global best at each iteration   </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">wmin</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">wmax</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+   
+        <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">=</span> <span class="n">c1</span> <span class="c1"># Learning factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="c1"># Global Learning factor        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wmin</span> <span class="o">=</span> <span class="n">wmin</span> <span class="c1"># Minimum weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wmax</span> <span class="o">=</span> <span class="n">wmax</span> <span class="c1"># Maximum weight</span>
+
+        <span class="c1"># Methods&#39; attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npart</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="kc">None</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># numpy.ndarray (npart, dim)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># numpy.ndarray (npart, dim)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># `float`</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># `float``</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness_per_iteration</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># numpy.ndarray (dim, 1) </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbest</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># numpy.ndarray (npart, dim)                </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># numpy.ndarray (npart, 1)</span>
+
+<div class="viewcode-block" id="Pso.optimize"><a class="viewcode-back" href="../../../../pyvvo.optimizers.pso.html#pyvvo.optimizers.pso.pso.Pso.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fitnessfunc</span><span class="p">,</span> <span class="n">npart</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">xstep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> 
+                 <span class="n">itermax</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">discretization</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xclamp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">vclamp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                 <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">report</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the PSO optimizer</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fitnessfunc : callable</span>
+<span class="sd">            A callback function that takes a `numpy.ndarray` as argument and returns</span>
+<span class="sd">            the corresponding fitness value.</span>
+<span class="sd">        npart : `int`</span>
+<span class="sd">            Number of particles</span>
+<span class="sd">        itermax : int, by default 200</span>
+<span class="sd">            Maximum number of iterations</span>
+<span class="sd">        xmin : `numpy.ndarray`, (1, dim)</span>
+<span class="sd">            Lower limit of each variable of the position vector</span>
+<span class="sd">        xmax : `numpy.ndarray`, (1, dim)</span>
+<span class="sd">            Upper limit of each variable of the position vector</span>
+<span class="sd">        vmin : `numpy.ndarray`, (1, dim), optional</span>
+<span class="sd">            Lower limit of each dimension of the particle&#39;s velocity</span>
+<span class="sd">        vmax : `numpy.ndarray`, (1, dim), optional</span>
+<span class="sd">            Upper limit of each dimension of the particle&#39;s velocity</span>
+<span class="sd">        xstep : `numpy.ndarray`, (1, dim), optional</span>
+<span class="sd">            Step size of each (discrete) variable of the position vector. A `None` </span>
+<span class="sd">            value indicates a continuous variable.</span>
+<span class="sd">        direction : {&#39;min&#39;, &#39;max&#39;}, by default &#39;min&#39;</span>
+<span class="sd">            Optimization direction. If &#39;min&#39;, seeks for a minimum.</span>
+<span class="sd">            If &#39;max&#39;, seeks for a maximum. </span>
+<span class="sd">        discretization : {&#39;iter&#39;, &#39;mid-iter ,  &#39;end&#39;}, by default None</span>
+<span class="sd">            Discretization strategy. In the &#39;iter&#39; case, the discrete variables</span>
+<span class="sd">            are rounded to the next discrete value at every iteration. In the </span>
+<span class="sd">            &#39;mid-iter&#39; case, the discretization is enabled only after ``maxiter``/2 </span>
+<span class="sd">            iterations. In the &#39;end&#39; strategy, the discretization is performed only </span>
+<span class="sd">            after the final convergence.</span>
+<span class="sd">        xclamp : bool, by default False</span>
+<span class="sd">            If `True`, each element of the position vector is forced to remain between </span>
+<span class="sd">            the limits in ``xmin`` and ``xmax``.</span>
+<span class="sd">        vclamp : bool, by default False</span>
+<span class="sd">            If `True`, each element of the velocity vector is forced to remain between </span>
+<span class="sd">            the limits in ``vmin`` and ``vmax``.</span>
+<span class="sd">        show_progress : bool, optional</span>
+<span class="sd">            _description_, by default False</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitnessfunc</span> <span class="o">=</span> <span class="n">fitnessfunc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">npart</span> <span class="o">=</span> <span class="n">npart</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xmin</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xmin</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">=</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xmax</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xstep</span> <span class="o">=</span> <span class="n">xstep</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discretization</span> <span class="o">=</span> <span class="n">discretization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">itermax</span> <span class="o">=</span> <span class="n">itermax</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">xclamp</span> <span class="o">=</span> <span class="n">xclamp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness_per_iteration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">itermax</span><span class="p">)</span>
+
+        <span class="c1"># Consistency check</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">vclamp</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">vmin</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">vmax</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pso error: vclamp need values for vmin and vmax&#39;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Initialize particle, velocities, pbest and gbest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npart</span><span class="p">):</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="n">rand</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">discretization</span> <span class="o">==</span> <span class="s1">&#39;iter&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_round_to_discrete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xstep</span><span class="p">,</span> <span class="n">xmin</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">vclamp</span> <span class="k">else</span> <span class="p">(</span><span class="n">vmin</span> <span class="o">+</span> <span class="n">rand</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xbest</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">fitnessfunc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbest_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getBest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gbest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xbest</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gbest_pos</span><span class="p">]</span>
+
+        <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span>
+        <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c2</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">wmin</span><span class="p">,</span> <span class="n">wmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wmax</span>
+        <span class="n">npart</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>
+        <span class="nb">iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter</span>
+
+        <span class="k">if</span> <span class="n">report</span> <span class="ow">or</span> <span class="n">show_progress</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* PSO results *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">report</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of particles:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">npart</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max. iterations:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">itermax</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Learning coefficients (c1,c2): &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c2</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weights (wmin, wmax): &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wmin</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wmax</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">progress.bar</span> <span class="kn">import</span> <span class="n">Bar</span>
+            <span class="n">bar</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="s1">&#39;Optimizing&#39;</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">itermax</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(index)d</span><span class="s1">/</span><span class="si">%(max)d</span><span class="s1"> (iterations)&#39;</span><span class="p">)</span>            
+
+        <span class="c1"># Main loop</span>
+        <span class="k">while</span> <span class="nb">iter</span> <span class="o">&lt;</span> <span class="n">itermax</span><span class="p">:</span>           
+            <span class="n">w</span> <span class="o">=</span> <span class="n">wmax</span> <span class="o">-</span> <span class="p">(</span><span class="n">wmax</span><span class="o">-</span><span class="n">wmin</span><span class="p">)</span><span class="o">*</span><span class="nb">iter</span><span class="o">/</span><span class="n">itermax</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness_per_iteration</span><span class="p">[</span><span class="nb">iter</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span>
+
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npart</span><span class="p">):</span>
+                <span class="c1"># Update velocity</span>
+                <span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span>
+                           <span class="o">+</span> <span class="n">c1</span><span class="o">*</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xbest</span><span class="p">[</span><span class="n">p</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,:])</span>
+                           <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gbest</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,:]))</span>
+
+                <span class="c1"># Velocity clamp</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">vclamp</span><span class="p">):</span>
+                     <span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bound</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:],</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">vmin</span><span class="p">)</span>
+
+                <span class="c1"># Update the position of the particles</span>
+                <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">xclamp</span><span class="p">):</span>
+                     <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bound</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">xmin</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">discretization</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">discretization</span> <span class="o">==</span> <span class="s1">&#39;iter&#39;</span> <span class="ow">or</span> \
+                       <span class="p">(</span><span class="n">discretization</span> <span class="o">==</span> <span class="s1">&#39;mid_iter&#39;</span> <span class="ow">and</span> <span class="nb">iter</span> <span class="o">&gt;</span> <span class="n">itermax</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+                        <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_round_to_discrete</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xstep</span><span class="p">,</span> <span class="n">xmin</span><span class="p">)</span>
+
+                <span class="c1"># Calculate fitness</span>
+                <span class="n">xfitp</span> <span class="o">=</span> <span class="n">fitnessfunc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="c1"># Check if pbest and gbest need to be updated</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isbetterThan</span><span class="p">(</span><span class="n">xfitp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span><span class="p">[</span><span class="n">p</span><span class="p">]):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">xbest</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">xbest_fitness</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">xfitp</span> 
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isbetterThan</span><span class="p">(</span><span class="n">xfitp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">gbest</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="p">:]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span> <span class="o">=</span> <span class="n">xfitp</span>
+
+            <span class="c1"># Velocity calculation and position update</span>
+            <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+                <span class="n">bar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">discretization</span> <span class="o">==</span> <span class="s1">&#39;end&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gbest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_round_to_discrete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gbest</span><span class="p">,</span> <span class="n">xstep</span><span class="p">,</span> <span class="n">xmin</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gbest_fitness</span> <span class="o">=</span> <span class="n">fitnessfunc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gbest</span><span class="p">)</span></div>
+
+        
+    <span class="k">def</span> <span class="nf">_getBest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xbests</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the value and position of the best element in the array ``xbests``</span>
+
+<span class="sd">        If the optmizing direction is ``&quot;min&quot;``, the minimum element is returned.</span>
+<span class="sd">        Otherwise, the maximum element is returned.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        xbests : `numpy.ndarray` , (npart, 1)</span>
+<span class="sd">            Input array</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (best_value, best_pos) : `tuple`</span>
+<span class="sd">            Best element&#39;s value and position</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+            <span class="n">best_value</span><span class="p">,</span> <span class="n">best_pos</span> <span class="o">=</span> <span class="n">xbests</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xbests</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="n">best_value</span><span class="p">,</span> <span class="n">best_pos</span> <span class="o">=</span> <span class="n">xbests</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">xbests</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">best_value</span><span class="p">,</span> <span class="n">best_pos</span>
+
+    <span class="k">def</span> <span class="nf">_isbetterThan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ga</span><span class="p">,</span> <span class="n">gb</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test if the real variable `ga` is better than `gb` in terms of fitness</span>
+
+<span class="sd">        If the optmizing direction is ``&quot;min&quot;``, the results of ga &lt; gb</span>
+<span class="sd">        is returned. Otherwise, the result of ga &gt; gb is returned.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ga : `float`</span>
+<span class="sd">            Left-hand value</span>
+<span class="sd">        gb : `float`</span>
+<span class="sd">            Right-hand value</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        result : `bool`</span>
+<span class="sd">            `True`, if ``ga`` is better than ``gb``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ga</span> <span class="o">&lt;</span> <span class="n">gb</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ga</span> <span class="o">&gt;</span> <span class="n">gb</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">_bound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">xmin</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply boundary conditions</span>
+
+<span class="sd">        Each element of x is tested against the corresponding maximum and minimum</span>
+<span class="sd">        limits. If there is a violation, the closest limit is enforced.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">xmax</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xmax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">xmin</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xmin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">_round_to_discrete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xstep</span><span class="p">,</span> <span class="n">xmin</span><span class="p">):</span>     
+        <span class="sd">&quot;&quot;&quot;Round to the nearest discrete variable</span>
+
+<span class="sd">        Each element of x is rounded to its nearest discrete variable, based on the</span>
+<span class="sd">        corresponding minimum values and step size.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : `numpy.ndarray` , (1, ndim)</span>
+<span class="sd">            Input array</span>
+<span class="sd">        xstep : `numpy.ndarray` , (1, ndim)</span>
+<span class="sd">            Step size for each element in ``x``</span>
+<span class="sd">        xmin : `numpy.ndarray` , (1, ndim)</span>
+<span class="sd">            Minimum value of each element of ``x``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------   </span>
+<span class="sd">        x_rounded : `numpy.ndarray` , (1, ndim)</span>
+<span class="sd">            Array with rounded values</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Only the elements with ``xstep`` different than `None` are rounded.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">x_rounded</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">xmin</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="n">xstep</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">[</span><span class="n">c</span><span class="p">])</span><span class="o">/</span><span class="n">xstep</span><span class="p">[</span><span class="n">c</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">xstep</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">else</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="k">return</span> <span class="n">x_rounded</span></div>
+            
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

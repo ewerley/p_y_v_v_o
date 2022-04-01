@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyvvo.report.vvo_output &mdash; pyvvo 0.9.5 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pyvvo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pyvvo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>pyvvo.report.vvo_output</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyvvo.report.vvo_output</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Vvo output auxiliary functions &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">pyvvo.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+<div class="viewcode-block" id="info_report"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.info_report">[docs]</a><span class="k">def</span> <span class="nf">info_report</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print a short summary report</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    options : `list` [ `str` ]</span>
+<span class="sd">        Types of reports to print</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="k">if</span> <span class="s1">&#39;info&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> pyVVO v&#39;</span> <span class="o">+</span> <span class="n">__version__</span> <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">* System information *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;System name:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of buses:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nbus</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of nodes:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nnodes</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of branches:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nbr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>        
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
+            <span class="n">goal</span> <span class="o">=</span> <span class="s1">&#39;loss minimization&#39;</span>
+        <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="n">goal</span> <span class="o">=</span> <span class="s1">&#39;voltage-deviation minimization&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimization goal:&#39;</span><span class="p">,</span> <span class="n">goal</span><span class="p">)</span>    
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of control variables:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">nc</span><span class="p">)</span>
+        <span class="c1"># print(&#39;Number of constraints:&#39;, vvo.nconstraints)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Discretization strategy:&#39;</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">discretization</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="base_report"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.base_report">[docs]</a><span class="k">def</span> <span class="nf">base_report</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print the base case report</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    options : `list` [ `str` ]</span>
+<span class="sd">        Types of reports to print</span>
+<span class="sd">    &quot;&quot;&quot;</span>       
+    <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;base_controls&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="c1"># Base case information</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Base-case report *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Controls</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">print_controls</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">u_opt</span><span class="o">=</span><span class="n">vvo</span><span class="o">.</span><span class="n">ubase</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">ofbase</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage-deviation (pu): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">ofbase</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">_evalFitness</span><span class="p">(</span><span class="n">goal</span><span class="o">=</span><span class="s1">&#39;min_losses&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="s1">&#39;base&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;base_voltages&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Base-case voltages (pu) *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">print_voltages</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>            
+
+    <span class="k">if</span> <span class="s1">&#39;base_loads&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Load report</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">print_loads</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;base_vchart&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: Base-case Line-to-neutral Voltages (p.u)&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;base_flows&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>        </div>
+
+
+<div class="viewcode-block" id="optimal_report"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.optimal_report">[docs]</a><span class="k">def</span> <span class="nf">optimal_report</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print a report of the optimal results</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    options : `list` [ `str` ]</span>
+<span class="sd">        Types of reports to print</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_controls&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="c1"># Optimization results</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimal controls</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+        <span class="n">print_controls</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">show_range</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimal Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">of_opt</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage deviation (pu): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">of_opt</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">_evalFitness</span><span class="p">(</span><span class="n">goal</span><span class="o">=</span><span class="s1">&#39;min_losses&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">()</span>
+ 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Penalty factors adopted</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">{:&lt;12}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">penalties</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="s1">&#39;kvar-cap&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">capacitor</span><span class="p">)</span> \
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="s1">&#39;tap&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">transformer</span><span class="p">)</span> \
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="s1">&#39;fp-inv&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">generator</span><span class="p">)</span> \
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="s1">&#39;kva-inv&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">generator</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">{:&lt;12}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">vvo</span><span class="o">.</span><span class="n">penalties</span><span class="p">[</span><span class="n">p</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>    
+
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;constraints&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">* Constraints *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># Load Voltage</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Load constraints </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">print_loads</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_voltages&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Voltages at the optimal solution (pu) *</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">print_voltages</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>  
+
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_flows&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;fitness_plot&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pyvvo.optimizers.pso.report</span> <span class="kn">import</span> <span class="n">fitness_plot</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating fitness plot..&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Close the graph window to quit.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># Fitness plot</span>
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; loss minimization&#39;</span>
+            <span class="n">vvo</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">gbest_fitness_per_iteration</span> <span class="o">/=</span> <span class="mf">1E3</span> <span class="c1"># printing in kw</span>
+            <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Fitness [kW]&#39;</span>
+        <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; voltage-deviation minimization&#39;</span>
+            <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Voltage [pu]&#39;</span>
+        <span class="n">fitness_plot</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">opt</span><span class="p">,</span> <span class="n">subtitle</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_vchart&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="print_controls"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_controls">[docs]</a><span class="k">def</span> <span class="nf">print_controls</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">u_opt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_range</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print the control variables</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    u_opt : `list`, optional</span>
+<span class="sd">        Array of optimal values</span>
+<span class="sd">    show_range : bool, by default False</span>
+<span class="sd">        If `False`, shows the minimum and maximum control ranges</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">u_opt</span><span class="p">:</span>
+        <span class="n">u_opt</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">u_opt</span>
+
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:^10s}{:^10s}{:^10s}</span><span class="s1">&#39;</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Device&#39;</span><span class="p">,</span> <span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+    <span class="n">dashed_line</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span>
+    <span class="k">if</span> <span class="n">show_range</span><span class="p">:</span>
+        <span class="n">fmt</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{:^15s}</span><span class="s1">&#39;</span>
+        <span class="n">var</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+        <span class="n">dashed_line</span> <span class="o">+=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">var</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">nc</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;generator&#39;</span><span class="p">:</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">variable</span> <span class="o">=</span> <span class="s1">&#39;pf&#39;</span>
+            <span class="n">kvar</span> <span class="o">=</span> <span class="n">u_opt</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+            <span class="n">generator</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">generator</span><span class="p">[</span><span class="n">vvo</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">kw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">generator</span><span class="p">[</span><span class="s1">&#39;kw&#39;</span><span class="p">])</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">kvar</span><span class="p">,</span><span class="n">kw</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">show_range</span><span class="p">:</span>        
+                <span class="n">urange</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">generator</span><span class="p">[</span><span class="s1">&#39;minpf&#39;</span><span class="p">],</span> <span class="n">generator</span><span class="p">[</span><span class="s1">&#39;maxpf&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">variable</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">uid</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">u_opt</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">show_range</span><span class="p">:</span>
+                <span class="n">urange</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">umin</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">vvo</span><span class="o">.</span><span class="n">umax</span><span class="p">[</span><span class="n">u</span><span class="p">])</span>
+        
+        <span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="n">device</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:^10g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>                
+        <span class="k">if</span> <span class="n">show_range</span><span class="p">:</span>
+            <span class="n">var</span> <span class="o">+=</span> <span class="p">[</span><span class="n">urange</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">var</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="print_loads"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_loads">[docs]</a><span class="k">def</span> <span class="nf">print_loads</span><span class="p">(</span><span class="n">vvo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print the loads available and the line-to-neutral voltages</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="n">loadbuses</span> <span class="o">=</span> <span class="p">[</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">]</span>
+    <span class="n">loadkeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">max_loadbus_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">loadbuses</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">))</span>
+    <span class="n">max_loadkey_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">))</span>
+
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;{:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^7s}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:&lt;5}</span><span class="s1">  </span><span class="si">{:^10s}</span><span class="s1"> </span><span class="si">{:^10s}</span><span class="s1"> </span><span class="si">{:^10s}</span><span class="s1">   </span><span class="si">{}</span><span class="s1">&#39;</span>
+
+    <span class="n">fmth1</span> <span class="o">=</span> <span class="s1">&#39;{:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^7s}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^5}</span><span class="s1">  </span><span class="si">{:^30s}</span><span class="s1">   </span><span class="si">{}</span><span class="s1">&#39;</span>        
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmth1</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;conn&#39;</span><span class="p">,</span>  <span class="s1">&#39;nodes&#39;</span><span class="p">,</span> <span class="s1">&#39; Line-to-neutral Voltages (pu)&#39;</span><span class="p">,</span> <span class="s1">&#39;     range&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph1&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph2&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph3&#39;</span><span class="p">,</span> <span class="s1">&#39;[Vmin,Vmax]&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">40</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span><span class="mi">12</span><span class="p">))</span>
+    
+    <span class="n">loadbuses_fromroot_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">loadbuses</span><span class="p">]</span>
+    <span class="c1"># loadbuses_sorted = [i[1] for i in sorted(list(zip(loadbuses_fromroot_indexes, loadbuses)))]</span>
+    <span class="n">loadkeys_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">loadbuses_fromroot_indexes</span><span class="p">,</span> <span class="n">loadkeys</span><span class="p">)))]</span>
+
+    <span class="c1"># Sort according to the substation proximity:</span>
+    <span class="c1"># loadbuses = sorted(set([vvo.grid.load[id_][&#39;bus1&#39;].split(&#39;.&#39;)[0] for id_ in vvo.grid.load]))</span>
+    <span class="c1"># loadbuses_fromroot_indexes = [vvo.grid.sweepfromroot_buses.index(l) for l in loadbuses]</span>
+    <span class="c1"># loadbuses = [i[1] for i in sorted(list(zip(loadbuses_fromroot_indexes, loadbuses)))]</span>
+
+    <span class="n">Vnodes_min</span> <span class="o">=</span> <span class="mf">1e5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">Vnodes_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">loadkeys_sorted</span><span class="p">:</span>
+
+        <span class="c1"># for id_ in vvo.grid.load:</span>
+        <span class="c1">#     # find first load connected in the bus</span>
+        <span class="c1">#     if vvo.grid.load[id_][&#39;bus1&#39;].split(&#39;.&#39;)[0] == bus:</span>
+        <span class="c1">#         break</span>
+            <span class="c1"># objetivo: capturar ids e fases das cargas na mesma barra (depois reduzir as fases)</span>
+        <span class="n">bus</span><span class="p">,</span> <span class="o">*</span><span class="n">load_nodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="c1"># phases = vvo.grid.load[key][&#39;phases&#39;]</span>
+        <span class="n">vminpu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;vminpu&#39;</span><span class="p">])</span>
+        <span class="n">vmaxpu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;vmaxpu&#39;</span><span class="p">])</span>
+        <span class="n">bus_nodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>    
+        <span class="k">if</span> <span class="s1">&#39;conn&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="s1">&#39;wye&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;conn&#39;</span><span class="p">]</span>
+        <span class="n">inodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;inodes&#39;</span><span class="p">]</span>
+        <span class="n">V</span> <span class="o">=</span>  <span class="nb">abs</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="n">inodes</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">inodes</span><span class="p">]</span> <span class="c1"># voltage magnitude in pu</span>
+        <span class="n">nodes_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">bus_nodes</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">load_nodes</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">load_nodes</span><span class="p">)</span>
+        <span class="c1">#nodes = &#39;   &#39;[:3-len(nodes)] + &#39;&#39;.join((sorted(nodes)))</span>
+        <span class="n">V3ph_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;U32&#39;</span><span class="p">)</span>
+        <span class="n">urange</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vminpu</span><span class="p">,</span> <span class="n">vmaxpu</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes_index</span><span class="p">):</span>
+            <span class="n">V3ph_str</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:^.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Vnodes_min</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">Vnodes_min</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Vnodes_max</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">Vnodes_max</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>                
+            
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bus</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">load_nodes</span><span class="p">,</span> <span class="o">*</span><span class="n">V3ph_str</span><span class="p">,</span> <span class="n">urange</span><span class="p">))</span>    
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">40</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">12</span><span class="p">))</span>
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
+        <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^7s}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^5s}</span><span class="s1"> &#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^10.5f}</span><span class="s1"> </span><span class="si">{:^10.5f}</span><span class="s1"> </span><span class="si">{:^10.5f}</span><span class="s1">&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;(Vmax)&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">Vnodes_max</span> <span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;(Vmin)&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">Vnodes_min</span> <span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="print_flows"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_flows">[docs]</a><span class="k">def</span> <span class="nf">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print a power flow (kW/kVar) report</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    &quot;&quot;&quot;</span>       
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;* Power flow report * </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">branch_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">branch</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;bus2&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;nodes2&#39;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">e</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">branch_list</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">k</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">branch_list</span> <span class="o">+=</span> <span class="p">[(</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">m</span> <span class="p">),</span> <span class="n">n</span><span class="p">)]</span>
+
+    <span class="n">maxlenbr</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">branch_list</span><span class="p">)),</span> <span class="mi">13</span><span class="p">)</span>
+    <span class="n">fmth</span> <span class="o">=</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxlenbr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;} </span><span class="si">{:^3s}</span><span class="s1"> </span><span class="si">{:&gt;10}</span><span class="s1"> </span><span class="si">{:&gt;12}</span><span class="s1">&#39;</span>
+    <span class="n">fmtr</span> <span class="o">=</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxlenbr</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;} </span><span class="si">{:^3s}</span><span class="s1"> </span><span class="si">{:&gt;10.4g}</span><span class="s1"> </span><span class="si">{:&gt;12.4g}</span><span class="s1">&#39;</span>    
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmth</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;branch (k-m)&#39;</span><span class="p">,</span><span class="s1">&#39;@node&#39;</span><span class="p">,</span><span class="s1">&#39;Pkm (kW)&#39;</span><span class="p">,</span><span class="s1">&#39;Qkm (kvar)&#39;</span><span class="p">))</span>
+    <span class="n">dashed_line</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">maxlenbr</span> <span class="o">+</span> <span class="mi">31</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Skm</span><span class="p">)):</span>
+        <span class="n">skm</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Skm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmtr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">branch_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skm</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">skm</span><span class="o">.</span><span class="n">imag</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="print_voltages"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_voltages">[docs]</a><span class="k">def</span> <span class="nf">print_voltages</span><span class="p">(</span><span class="n">vvo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print line-to-neutral per-unit voltages</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    &quot;&quot;&quot;</span>      
+    <span class="n">maxbus_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">orderbus</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">))</span>
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxbus_length</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}</span><span class="si">{:^7s}</span><span class="s1"> </span><span class="si">{:^11s}</span><span class="s1"> </span><span class="si">{:^11s}</span><span class="s1"> </span><span class="si">{:^11s}</span><span class="s1">&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;kV base &#39;</span><span class="p">,</span>  <span class="s1">&#39;  V @ ph1 &#39;</span><span class="p">,</span> <span class="s1">&#39; V @ ph2 &#39;</span><span class="p">,</span> <span class="s1">&#39; V @ ph3 &#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">maxbus_length</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">40</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">bus</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">:</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>    
+        <span class="n">inodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;inodes&#39;</span><span class="p">]</span>
+        <span class="n">V</span> <span class="o">=</span>  <span class="nb">abs</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="n">inodes</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">inodes</span><span class="p">]</span> <span class="c1"># voltage magnitude in pu</span>
+        <span class="n">vbuses_base</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">inodes</span><span class="p">]</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">vbuses_base</span><span class="o">-</span> <span class="n">vbuses_base</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">vbus_base</span> <span class="o">=</span> <span class="n">vbuses_base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">nodes_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">V3ph_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;U32&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes_index</span><span class="p">):</span>
+            <span class="n">V3ph_str</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:^.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>                            
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{:^7g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vbus_base</span><span class="o">/</span><span class="mi">1000</span><span class="p">),</span> <span class="o">*</span><span class="n">V3ph_str</span><span class="p">))</span>    
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">maxbus_length</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">40</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>    </div>
+
+
+<div class="viewcode-block" id="print_voltage_chart"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_voltage_chart">[docs]</a><span class="k">def</span> <span class="nf">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print the loads available and the line-to-neutral voltages</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vvo : `pyvvo.Vvo`</span>
+<span class="sd">        Vvo object</span>
+<span class="sd">    chart_title : `str`, default None</span>
+<span class="sd">        Chart title</span>
+<span class="sd">    &quot;&quot;&quot;</span>            
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Generating voltage chart... </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">chart_title</span><span class="p">:</span>
+        <span class="n">chart_title</span> <span class="o">=</span> <span class="s1">&#39;System </span><span class="si">{}</span><span class="s1">: Optimal Line-to-neutral Voltages (p.u)&#39;</span>
+
+    <span class="n">loadbuses</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">])</span>
+    <span class="n">Vmin_load</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">loadbuses</span><span class="p">)</span>
+    <span class="n">Vmax_load</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">loadbuses</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">bus</span> <span class="ow">in</span> <span class="n">loadbuses</span><span class="p">:</span>
+        <span class="n">Vmin_load</span><span class="p">[</span><span class="n">bus</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">Vmax_load</span><span class="p">[</span><span class="n">bus</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">:</span>
+        <span class="n">bus</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">vmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;vminpu&#39;</span><span class="p">])</span>
+        <span class="n">vmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;vmaxpu&#39;</span><span class="p">])</span>
+        <span class="n">Vmin_load</span><span class="p">[</span><span class="n">bus</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vmin</span><span class="p">]</span>
+        <span class="n">Vmax_load</span><span class="p">[</span><span class="n">bus</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">vmax</span><span class="p">]</span>
+
+    <span class="c1"># Test here if all loads in a same bus have the same limits</span>
+    <span class="k">for</span> <span class="n">bus</span> <span class="ow">in</span> <span class="n">loadbuses</span><span class="p">:</span>       
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Vmin_load</span><span class="p">[</span><span class="n">bus</span><span class="p">])</span><span class="o">-</span><span class="n">Vmin_load</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Vmax_load</span><span class="p">[</span><span class="n">bus</span><span class="p">])</span><span class="o">-</span><span class="n">Vmax_load</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">)</span>
+
+    <span class="n">V</span> <span class="o">=</span> <span class="p">([</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nbus</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nbus</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nbus</span><span class="p">)</span>
+    <span class="n">Vmin</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">)</span>
+    <span class="n">Vmax</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Vmin_load</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">Vmin</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Vmax_load</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>       
+        <span class="n">Vmax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">bus</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="s1">&#39;nodes&#39;</span><span class="p">]:</span>
+            <span class="n">inode</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">busnodes</span><span class="p">[</span><span class="n">bus</span><span class="p">][</span><span class="n">p</span><span class="p">]</span>
+            <span class="n">Vpu</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="n">inode</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">inode</span><span class="p">]</span>
+            <span class="n">V</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vpu</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;grid.color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">.1</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;bus&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Vln (pu)&#39;</span><span class="p">)</span>
+    <span class="c1">#ax.yaxis.set_major_formatter(FormatStrFormatter(&#39;%.1f&#39;))</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;rgb&#39;</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;V&#39;</span> <span class="o">+</span> <span class="n">label</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">,</span> <span class="n">Vmin</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Vmin&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>        
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot_buses</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Vmax&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>        
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">chart_title</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span><span class="p">))</span>    
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> </div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

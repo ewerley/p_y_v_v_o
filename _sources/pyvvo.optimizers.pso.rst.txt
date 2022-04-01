@@ -1,0 +1,29 @@
+pyvvo.optimizers.pso package
+============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pyvvo.optimizers.pso.report
+
+Submodules
+----------
+
+pyvvo.optimizers.pso.pso module
+-------------------------------
+
+.. automodule:: pyvvo.optimizers.pso.pso
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pyvvo.optimizers.pso
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,10 @@
+pyvvo.resources package
+=======================
+
+Module contents
+---------------
+
+.. automodule:: pyvvo.resources
+   :members:
+   :undoc-members:
+   :show-inheritance:

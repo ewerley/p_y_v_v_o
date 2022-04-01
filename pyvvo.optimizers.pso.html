@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyvvo.optimizers.pso package &mdash; pyvvo 0.9.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyvvo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyvvo.optimizers.pso package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyvvo.optimizers.pso.pso">pyvvo.optimizers.pso.pso module</a></li>
+<li><a class="reference internal" href="#module-pyvvo.optimizers.pso">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyvvo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>pyvvo.optimizers.pso package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyvvo.optimizers.pso.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyvvo-optimizers-pso-package">
+<h1>pyvvo.optimizers.pso package<a class="headerlink" href="#pyvvo-optimizers-pso-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyvvo.optimizers.pso.report.html">pyvvo.optimizers.pso.report package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyvvo.optimizers.pso.report.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyvvo.optimizers.pso.report.html#module-pyvvo.optimizers.pso.report.pso_output">pyvvo.optimizers.pso.report.pso_output module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyvvo.optimizers.pso.report.html#module-pyvvo.optimizers.pso.report">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-pyvvo.optimizers.pso.pso">
+<span id="pyvvo-optimizers-pso-pso-module"></span><h2>pyvvo.optimizers.pso.pso module<a class="headerlink" href="#module-pyvvo.optimizers.pso.pso" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvvo.optimizers.pso.pso.Pso">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyvvo.optimizers.pso.pso.</span></span><span class="sig-name descname"><span class="pre">Pso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/optimizers/pso/pso.html#Pso"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.optimizers.pso.pso.Pso" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Python class for the PSO optmizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c1</strong> (<cite>float</cite>, by default 1.) – Learning (cognitive) parameter</p></li>
+<li><p><strong>c2</strong> (<cite>float</cite>, by default 1.5) – Global learning (social) parameter</p></li>
+<li><p><strong>wmin</strong> (<cite>float</cite>, by default 0.3) – Minimum weight</p></li>
+<li><p><strong>wmax</strong> (<cite>float</cite>, by default 0.9) – Maximum weight</p></li>
+<li><p><strong>attributes**</strong> (<em>**General</em>) – </p></li>
+<li><p><strong>npart</strong> (<cite>int</cite>) – Number of particles</p></li>
+<li><p><strong>dim</strong> (<cite>int</cite>) – Problem’s dimension</p></li>
+<li><p><strong>x</strong> (<cite>numpy.ndarray</cite>, (npart, dim)) – Position vector of the population</p></li>
+<li><p><strong>v</strong> (<cite>numpy.ndarray</cite>, (npart, dim)) – Velocity vector of the population</p></li>
+<li><p><strong>w</strong> (<cite>float</cite>) – Velocity weight</p></li>
+<li><p><strong>xbest</strong> (<cite>numpy.ndarray</cite>, (npart, dim)) – Best position vector of each particle</p></li>
+<li><p><strong>xbest_fitness</strong> (<cite>numpy.ndarray</cite>, (npart, 1)) – Fitness value of xbest</p></li>
+<li><p><strong>gbest</strong> (<cite>numpy.ndarray</cite>, (npart, 1)) – Best position vector among all particles (global best)</p></li>
+<li><p><strong>gbest_fitness</strong> (<cite>numpy.ndarray</cite>, (itermax, 1)) – Fitness value of the global best</p></li>
+<li><p><strong>gbest_fitness</strong> – Fitness value of the global best at each iteration</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvvo.optimizers.pso.pso.Pso.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitnessfunc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">npart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itermax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discretization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xclamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vclamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/optimizers/pso/pso.html#Pso.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.optimizers.pso.pso.Pso.optimize" title="Permalink to this definition"></a></dt>
+<dd><p>Run the PSO optimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fitnessfunc</strong> (<em>callable</em>) – A callback function that takes a <cite>numpy.ndarray</cite> as argument and returns
+the corresponding fitness value.</p></li>
+<li><p><strong>npart</strong> (<cite>int</cite>) – Number of particles</p></li>
+<li><p><strong>itermax</strong> (<em>int</em><em>, </em><em>by default 200</em>) – Maximum number of iterations</p></li>
+<li><p><strong>xmin</strong> (<cite>numpy.ndarray</cite>, (1, dim)) – Lower limit of each variable of the position vector</p></li>
+<li><p><strong>xmax</strong> (<cite>numpy.ndarray</cite>, (1, dim)) – Upper limit of each variable of the position vector</p></li>
+<li><p><strong>vmin</strong> (<cite>numpy.ndarray</cite>, (1, dim), optional) – Lower limit of each dimension of the particle’s velocity</p></li>
+<li><p><strong>vmax</strong> (<cite>numpy.ndarray</cite>, (1, dim), optional) – Upper limit of each dimension of the particle’s velocity</p></li>
+<li><p><strong>xstep</strong> (<cite>numpy.ndarray</cite>, (1, dim), optional) – Step size of each (discrete) variable of the position vector. A <cite>None</cite>
+value indicates a continuous variable.</p></li>
+<li><p><strong>direction</strong> (<em>{'min'</em><em>, </em><em>'max'}</em><em>, </em><em>by default 'min'</em>) – Optimization direction. If ‘min’, seeks for a minimum.
+If ‘max’, seeks for a maximum.</p></li>
+<li><p><strong>discretization</strong> (<em>{'iter'</em><em>, </em><em>'mid-iter</em><em> ,  </em><em>'end'}</em><em>, </em><em>by default None</em>) – Discretization strategy. In the ‘iter’ case, the discrete variables
+are rounded to the next discrete value at every iteration. In the
+‘mid-iter’ case, the discretization is enabled only after <code class="docutils literal notranslate"><span class="pre">maxiter</span></code>/2
+iterations. In the ‘end’ strategy, the discretization is performed only
+after the final convergence.</p></li>
+<li><p><strong>xclamp</strong> (<em>bool</em><em>, </em><em>by default False</em>) – If <cite>True</cite>, each element of the position vector is forced to remain between
+the limits in <code class="docutils literal notranslate"><span class="pre">xmin</span></code> and <code class="docutils literal notranslate"><span class="pre">xmax</span></code>.</p></li>
+<li><p><strong>vclamp</strong> (<em>bool</em><em>, </em><em>by default False</em>) – If <cite>True</cite>, each element of the velocity vector is forced to remain between
+the limits in <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code>.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – _description_, by default False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyvvo.optimizers.pso.pso.rand">
+<span class="sig-prename descclassname"><span class="pre">pyvvo.optimizers.pso.pso.</span></span><span class="sig-name descname"><span class="pre">rand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d0</span></em>, <em class="sig-param"><span class="pre">d1</span></em>, <em class="sig-param"><span class="pre">...</span></em>, <em class="sig-param"><span class="pre">dn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvvo.optimizers.pso.pso.rand" title="Permalink to this definition"></a></dt>
+<dd><p>Random values in a given shape.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a convenience function for users porting code from Matlab,
+and wraps <cite>random_sample</cite>. That function takes a
+tuple to specify the size of the output, which is consistent with
+other NumPy functions like <cite>numpy.zeros</cite> and <cite>numpy.ones</cite>.</p>
+</div>
+<p>Create an array of the given shape and populate it with
+random samples from a uniform distribution
+over <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d0</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>d1</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>...</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>dn</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – Random values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, shape <code class="docutils literal notranslate"><span class="pre">(d0,</span> <span class="pre">d1,</span> <span class="pre">...,</span> <span class="pre">dn)</span></code></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">random</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[ 0.14022471,  0.96360618],  #random</span>
+<span class="go">       [ 0.37601032,  0.25528411],  #random</span>
+<span class="go">       [ 0.49313049,  0.94909878]]) #random</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-pyvvo.optimizers.pso">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyvvo.optimizers.pso" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
