@@ -1,31 +1,64 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyvvo.report.vvo_output &mdash; pyvvo 0.9.5 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <meta charset="utf-8">
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyvvo.report.vvo_output &mdash; pyvvo 1.0-rc.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
+          
+
+          
             <a href="../../../index.html" class="icon icon-home"> pyvvo
+          
+
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -33,40 +66,97 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#quick-example">Quick example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#bugs">Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#license">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pyvvo.html">PyVVO API</a></li>
+</ul>
+
+            
+          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">pyvvo</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
       <li>pyvvo.report.vvo_output</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <h1>Source code for pyvvo.report.vvo_output</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; Vvo output auxiliary functions &quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">pyvvo.version</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">pyvvo.version</span> <span class="k">import</span> <span class="n">__version__</span>
 
 <div class="viewcode-block" id="info_report"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.info_report">[docs]</a><span class="k">def</span> <span class="nf">info_report</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Print a short summary report</span>
@@ -117,7 +207,7 @@
         <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">ofbase</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
         <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage-deviation (pu): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">ofbase</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage-deviation (pu): </span><span class="si">{:5g}</span><span class="s1"> (main goal)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">ofbase</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Losses (kw): </span><span class="si">{:5g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">_evalFitness</span><span class="p">(</span><span class="n">goal</span><span class="o">=</span><span class="s1">&#39;min_losses&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
 
         <span class="nb">print</span><span class="p">()</span>
@@ -134,7 +224,7 @@
         <span class="n">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: Base-case Line-to-neutral Voltages (p.u)&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s1">&#39;base_flows&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-        <span class="n">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>        </div>
+        <span class="n">print_flows_root_sorted</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>        </div>
 
 
 <div class="viewcode-block" id="optimal_report"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.optimal_report">[docs]</a><span class="k">def</span> <span class="nf">optimal_report</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
@@ -184,24 +274,30 @@
         <span class="n">print_voltages</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>  
 
     <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_flows&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-        <span class="n">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>
+        <span class="n">print_flows_root_sorted</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span>                
 
     <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;fitness_plot&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">pyvvo.optimizers.pso.report</span> <span class="kn">import</span> <span class="n">fitness_plot</span>
+        <span class="kn">from</span> <span class="nn">pyvvo.optimizers.pso.report</span> <span class="k">import</span> <span class="n">fitness_plot</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating fitness plot..&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Close the graph window to quit.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># Fitness plot</span>
         <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_losses&#39;</span><span class="p">:</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; loss minimization&#39;</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal_str</span>
             <span class="n">vvo</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">gbest_fitness_per_iteration</span> <span class="o">/=</span> <span class="mf">1E3</span> <span class="c1"># printing in kw</span>
             <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Fitness [kW]&#39;</span>
         <span class="k">elif</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; voltage-deviation minimization&#39;</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sysname</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal_str</span>
             <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Voltage [pu]&#39;</span>
         <span class="n">fitness_plot</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">opt</span><span class="p">,</span> <span class="n">subtitle</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s1">&#39;opt&#39;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s1">&#39;opt_vchart&#39;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
-        <span class="n">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">)</span></div>
+        <span class="n">chart_title</span> <span class="o">=</span> <span class="s1">&#39;System </span><span class="si">{}</span><span class="s1"> - Optimal Line-to-neutral Voltages (p.u)</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chart_title</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span>
+        <span class="n">subtitle</span> <span class="o">=</span> <span class="s1">&#39;Goal: &#39;</span> <span class="o">+</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal_str</span>
+        <span class="k">if</span> <span class="n">vvo</span><span class="o">.</span><span class="n">goal</span> <span class="o">==</span> <span class="s1">&#39;min_dv&#39;</span><span class="p">:</span>
+            <span class="n">subtitle</span> <span class="o">+=</span> <span class="s1">&#39;Vnom=&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:g}</span><span class="s1"> p.u.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">vnom_dv</span><span class="p">)</span>
+        <span class="n">chart_title</span> <span class="o">+=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subtitle</span><span class="p">)</span>
+        <span class="n">print_voltage_chart</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="n">chart_title</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="print_controls"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_controls">[docs]</a><span class="k">def</span> <span class="nf">print_controls</span><span class="p">(</span><span class="n">vvo</span><span class="p">,</span> <span class="n">u_opt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_range</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -277,7 +373,7 @@
         <span class="o">+</span> <span class="s1">&#39;{:^&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;s}&#39;</span> \
         <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^7s}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{:^5}</span><span class="s1">  </span><span class="si">{:^30s}</span><span class="s1">   </span><span class="si">{}</span><span class="s1">&#39;</span>        
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">fmth1</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;conn&#39;</span><span class="p">,</span>  <span class="s1">&#39;nodes&#39;</span><span class="p">,</span> <span class="s1">&#39; Line-to-neutral Voltages (pu)&#39;</span><span class="p">,</span> <span class="s1">&#39;     range&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmth1</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;load id&#39;</span><span class="p">,</span> <span class="s1">&#39;bus&#39;</span><span class="p">,</span> <span class="s1">&#39;conn&#39;</span><span class="p">,</span>  <span class="s1">&#39;nodes&#39;</span><span class="p">,</span> <span class="s1">&#39; Line-to-neutral Voltages (pu)&#39;</span><span class="p">,</span> <span class="s1">&#39;     range&#39;</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph1&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph2&#39;</span><span class="p">,</span> <span class="s1">&#39;V @ ph3&#39;</span><span class="p">,</span> <span class="s1">&#39;[Vmin,Vmax]&#39;</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">max_loadkey_length</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">max_loadbus_length</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">40</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span><span class="mi">12</span><span class="p">))</span>
     
@@ -294,11 +390,6 @@
     <span class="n">Vnodes_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">loadkeys_sorted</span><span class="p">:</span>
 
-        <span class="c1"># for id_ in vvo.grid.load:</span>
-        <span class="c1">#     # find first load connected in the bus</span>
-        <span class="c1">#     if vvo.grid.load[id_][&#39;bus1&#39;].split(&#39;.&#39;)[0] == bus:</span>
-        <span class="c1">#         break</span>
-            <span class="c1"># objetivo: capturar ids e fases das cargas na mesma barra (depois reduzir as fases)</span>
         <span class="n">bus</span><span class="p">,</span> <span class="o">*</span><span class="n">load_nodes</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
         <span class="c1"># phases = vvo.grid.load[key][&#39;phases&#39;]</span>
         <span class="n">vminpu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">load</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;vminpu&#39;</span><span class="p">])</span>
@@ -333,8 +424,8 @@
     <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="print_flows"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_flows">[docs]</a><span class="k">def</span> <span class="nf">print_flows</span><span class="p">(</span><span class="n">vvo</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Print a power flow (kW/kVar) report</span>
+<div class="viewcode-block" id="print_flows_root_sorted"><a class="viewcode-back" href="../../../pyvvo.report.html#pyvvo.report.vvo_output.print_flows_root_sorted">[docs]</a><span class="k">def</span> <span class="nf">print_flows_root_sorted</span><span class="p">(</span><span class="n">vvo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print a power flow (kW/kVar)</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -342,8 +433,19 @@
 <span class="sd">        Vvo object</span>
 <span class="sd">    &quot;&quot;&quot;</span>       
     <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;* Power flow report * </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">branch_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">skm_fromsub</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">branch_keys_fromsub</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">sweepfromroot</span><span class="o">.</span><span class="n">edges</span><span class="p">()):</span>
+        <span class="n">npar</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">H</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npar</span><span class="p">):</span>
+            <span class="n">id_</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">m</span><span class="p">][</span><span class="n">l</span><span class="p">][</span><span class="s1">&#39;id_&#39;</span><span class="p">]</span>
+            <span class="n">branch_keys_fromsub</span> <span class="o">+=</span> <span class="p">[</span><span class="n">id_</span><span class="p">]</span>
+            <span class="n">skm_fromsub</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">id_</span><span class="p">][</span><span class="s1">&#39;skm&#39;</span><span class="p">])</span>
+    <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">branch_keys</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">branch_keys_fromsub</span><span class="p">))</span>
+
     <span class="n">branch_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">branch</span> <span class="ow">in</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">branch</span> <span class="ow">in</span> <span class="n">branch_keys_fromsub</span><span class="p">:</span>
         <span class="n">k</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;bus1&#39;</span><span class="p">]</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;bus2&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch</span><span class="p">][</span><span class="s1">&#39;nodes2&#39;</span><span class="p">]):</span>
@@ -358,8 +460,8 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">fmth</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;branch (k-m)&#39;</span><span class="p">,</span><span class="s1">&#39;@node&#39;</span><span class="p">,</span><span class="s1">&#39;Pkm (kW)&#39;</span><span class="p">,</span><span class="s1">&#39;Qkm (kvar)&#39;</span><span class="p">))</span>
     <span class="n">dashed_line</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">maxlenbr</span> <span class="o">+</span> <span class="mi">31</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Skm</span><span class="p">)):</span>
-        <span class="n">skm</span> <span class="o">=</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">Skm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">skm_fromsub</span><span class="p">)):</span>
+        <span class="n">skm</span> <span class="o">=</span> <span class="n">skm_fromsub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">1000</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">fmtr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">branch_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">skm</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">skm</span><span class="o">.</span><span class="n">imag</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">dashed_line</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span></div>
@@ -443,7 +545,7 @@
             <span class="n">Vpu</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">E</span><span class="p">[</span><span class="n">inode</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">vvo</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">vbase</span><span class="p">[</span><span class="n">inode</span><span class="p">]</span>
             <span class="n">V</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vpu</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;grid.color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">.1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;grid.color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;bus&#39;</span><span class="p">)</span>
@@ -466,26 +568,57 @@
 </pre></div>
 
            </div>
+           
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
-  </div>
+    <p>
+        &copy; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0-rc.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

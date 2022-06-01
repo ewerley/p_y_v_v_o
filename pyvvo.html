@@ -1,33 +1,66 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyvvo package &mdash; pyvvo 0.9.5 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="_static/js/theme.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyvvo package &mdash; pyvvo 1.0-rc.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyvvo.optimizers package" href="pyvvo.optimizers.html" />
+    <link rel="prev" title="Features" href="readme.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
+          
+
+          
             <a href="index.html" class="icon icon-home"> pyvvo
+          
+
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -35,50 +68,111 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">pyvvo package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-pyvvo.vvo">pyvvo.vvo module</a></li>
-<li><a class="reference internal" href="#module-pyvvo.loadflow">pyvvo.loadflow module</a></li>
-<li><a class="reference internal" href="#module-pyvvo.powergrid">pyvvo.powergrid module</a></li>
-<li><a class="reference internal" href="#module-pyvvo.pyopendss">pyvvo.pyopendss module</a></li>
-<li><a class="reference internal" href="#module-pyvvo.gridutils">pyvvo.gridutils module</a></li>
-<li><a class="reference internal" href="#module-pyvvo">Module contents</a></li>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#quick-example">Quick example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#bugs">Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#license">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyVVO API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyvvo.optimizers.html">pyvvo.optimizers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyvvo.report.html">pyvvo.report package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyvvo.resources.html">pyvvo.resources package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo.vvo">pyvvo.vvo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo.loadflow">pyvvo.loadflow module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo.powergrid">pyvvo.powergrid module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo.pyopendss">pyvvo.pyopendss module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo.gridutils">pyvvo.gridutils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyvvo">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+
+            
+          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">pyvvo</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
       <li>pyvvo package</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+            
             <a href="_sources/pyvvo.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
-  <section id="pyvvo-package">
-<h1>pyvvo package<a class="headerlink" href="#pyvvo-package" title="Permalink to this headline"></a></h1>
-<section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+            
+  <div class="section" id="pyvvo-package">
+<h1>pyvvo package<a class="headerlink" href="#pyvvo-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pyvvo.optimizers.html">pyvvo.optimizers package</a><ul>
@@ -107,480 +201,516 @@
 </li>
 </ul>
 </div>
-</section>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
-</section>
-<section id="module-pyvvo.vvo">
-<span id="pyvvo-vvo-module"></span><h2>pyvvo.vvo module<a class="headerlink" href="#module-pyvvo.vvo" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyvvo.vvo">
+<span id="pyvvo-vvo-module"></span><h2>pyvvo.vvo module<a class="headerlink" href="#module-pyvvo.vvo" title="Permalink to this headline">¶</a></h2>
 <p>A class to perform Voltage-Var Optimization in Distribution Systems</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyvvo.vvo.Vvo">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyvvo.vvo.</span></span><span class="sig-name descname"><span class="pre">Vvo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vvofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sysfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.vvo.Vvo" title="Permalink to this definition"></a></dt>
+<dl class="class">
+<dt id="pyvvo.vvo.Vvo">
+<em class="property">class </em><code class="descclassname">pyvvo.vvo.</code><code class="descname">Vvo</code><span class="sig-paren">(</span><em>vvofile</em>, <em>sysfile=None</em>, <em>grid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.vvo.Vvo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to perform Voltage-Var Optimization in Distribution Systems</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>vvofile</strong> (<cite>str</cite>) – Path to the main .vvo file with control definitions</p></li>
-<li><p><strong>sysfile</strong> (<cite>str</cite>, optional) – Path to the associated .dss file with network data. If not provided,
-a file with the same name as <code class="docutils literal notranslate"><span class="pre">vvofile</span></code> and a ‘.dss’ extension
-will be sought.</p></li>
-<li><p><strong>grid</strong> (<cite>powergrid</cite>, default None) – Power system model represented as a Powergrid object.
-If should be provided in case <code class="docutils literal notranslate"><span class="pre">sysfile</span></code> is not given.</p></li>
-<li><p><strong>structures**</strong> (<em>**Control</em>) – </p></li>
-<li><p><strong>capvvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Capacitor control data. The keys <cite>str</cite> are the identifiers of the
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vvofile</strong> (<cite>str</cite>) – Path to the main .vvo file with control definitions</li>
+<li><strong>sysfile</strong> (<cite>str</cite>, optional) – Path to the associated <cite>.dss</cite> file with network data. If not provided,
+a file with the same name as <code class="docutils literal notranslate"><span class="pre">vvofile</span></code> and a <cite>.dss</cite> extension
+will be sought.</li>
+<li><strong>grid</strong> (<cite>powergrid</cite>, default None) – Power system model represented as a Powergrid object.
+If should be provided in case <code class="docutils literal notranslate"><span class="pre">sysfile</span></code> is not given.</li>
+<li><strong>capvvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Capacitor control data. The keys <cite>str</cite> are the identifiers of the
 controlled capacitors, as in <code class="docutils literal notranslate"><span class="pre">pyvvo.grid.capacitor</span></code>.
 Each subkey is a dictionary with the following control properties:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">Maxkvar</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Maximum kVar of the bank (total of all phases)</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Numsteps</span></code><span class="classifier"><cite>int</cite></span></dt><dd><p>Number of steps in the capacitor bank.</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Maxkvar</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Maximum kVar of the bank (total of all phases)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Numsteps</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>int</cite></span></dt>
+<dd>Number of steps in the capacitor bank.</dd>
 </dl>
-</p></li>
-<li><p><strong>trvvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Transformer control data. The keys <cite>str</cite> are the identifiers of the
+</li>
+<li><strong>trvvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Transformer control data. The keys <cite>str</cite> are the identifiers of the
 controlled transformers, as in <code class="docutils literal notranslate"><span class="pre">pyvvo.grid.transformer</span></code>.
 Each internal <cite>dict</cite> should have the following control properties:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">MinTap</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Minimum per unit tap</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">MaxTap</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Maximum per unit tap</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">NumTaps</span></code><span class="classifier"><cite>int</cite></span></dt><dd><p>Total number of taps between min and max tap</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MinTap</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Minimum per unit tap</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxTap</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Maximum per unit tap</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NumTaps</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>int</cite></span></dt>
+<dd>Total number of taps between min and max tap</dd>
 </dl>
-</p></li>
-<li><p><strong>invertervvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Smart-inverter control data. The keys <cite>str</cite> are the identifiers of
+</li>
+<li><strong>invertervvocontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Smart-inverter control data. The keys <cite>str</cite> are the identifiers of
 the controlled generators, as in <code class="docutils literal notranslate"><span class="pre">pyvvo.grid.generator</span></code>
 Each <cite>dict</cite> subkey should have the following control properties:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">MinPF</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Minimum power factor allowed at the generation point.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">MaxPF</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Maximum power factor allowed at the generation point.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Maxkva</span></code><span class="classifier"><cite>float</cite></span></dt><dd><p>Maximum kvA at the generation point.</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">MinPF</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Minimum power factor allowed at the generation point.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MaxPF</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Maximum power factor allowed at the generation point.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Maxkva</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>float</cite></span></dt>
+<dd>Maximum kvA at the generation point.</dd>
 </dl>
-</p></li>
-<li><p><strong>attributes**</strong> (<em>**Internal</em>) – </p></li>
-<li><p><strong>__version__</strong> (<cite>str</cite>) – Current version of the Vvo package.</p></li>
-<li><p><strong>optimizer</strong> – Reference to the external optimizer object.</p></li>
-<li><p><strong>lf</strong> (<cite>pyvvo.loadflow.Loadflow</cite>) – Reference to the internal loadflow object.</p></li>
-<li><p><strong>penalties</strong> (<cite>list</cite> [ <cite>str</cite> ] or <cite>dict</cite>) – A list of optimization penalties. See <cite>pyvvo.Vvo.optimize</cite>.</p></li>
-<li><p><strong>discretization</strong> (<cite>str</cite>, by default None) – Discretization strategy passed to the solver.</p></li>
-<li><p><strong>nc</strong> (<cite>int</cite>) – Number of controls.</p></li>
-<li><p><strong>ncap</strong> (<cite>int</cite>) – Number of capacitor controls.</p></li>
-<li><p><strong>ntr</strong> (<cite>int</cite>) – Number of transformer controls.</p></li>
-<li><p><strong>ninv</strong> (<cite>int</cite>) – Number of smart-inverter controls.</p></li>
-<li><p><strong>u</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Actual values of the control variables, (nc, 1).</p></li>
-<li><p><strong>umin</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Lower limit of each control variable, (nc, 1).</p></li>
-<li><p><strong>umax</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Upper limit of each control variable, (nc, 1).</p></li>
-<li><p><strong>ustep</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Step-size of each control variable of discrete type, (nc, 1).</p></li>
-<li><p><strong>uid</strong> (<cite>list</cite> [ <cite>list</cite> ], (nc, 4)) – <p>List of properties of each control variable, as following:</p>
-<dl>
-<dt>type<span class="classifier">{‘capacitor’, ‘transformer’, ‘generator’}</span></dt><dd><p>Type of the controlled equipment.</p>
-</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">id_</span></a><span class="classifier"><cite>str</cite></span></dt><dd><p>Identifier of the equipment</p>
-</dd>
-<dt>varname<span class="classifier"><cite>str</cite></span></dt><dd><p>name of the controlled parameter</p>
-</dd>
-<dt>ph<span class="classifier"><cite>int</cite></span></dt><dd><p>number of phases (not currently used)</p>
-</dd>
+</li>
+<li><strong>__version__</strong> (<cite>str</cite>) – Current version of the Vvo package.</li>
+<li><strong>optimizer</strong> – Reference to the external optimizer object.</li>
+<li><strong>lf</strong> (<cite>pyvvo.loadflow.Loadflow</cite>) – Reference to the internal loadflow object.</li>
+<li><strong>penalties</strong> (<cite>list</cite> [ <cite>str</cite> ] or <cite>dict</cite>) – A list of optimization penalties. See <cite>pyvvo.Vvo.optimize</cite>.</li>
+<li><strong>discretization</strong> (<cite>str</cite>, by default None) – Discretization strategy passed to the solver.</li>
+<li><strong>nc</strong> (<cite>int</cite>) – Number of controls.</li>
+<li><strong>ncap</strong> (<cite>int</cite>) – Number of capacitor controls.</li>
+<li><strong>ntr</strong> (<cite>int</cite>) – Number of transformer controls.</li>
+<li><strong>ninv</strong> (<cite>int</cite>) – Number of smart-inverter controls.</li>
+<li><strong>u</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Actual values of the control variables, (nc, 1).</li>
+<li><strong>umin</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Lower limit of each control variable, (nc, 1).</li>
+<li><strong>umax</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Upper limit of each control variable, (nc, 1).</li>
+<li><strong>ustep</strong> (<cite>list</cite> [ <cite>float</cite> ]) – Step-size of each control variable of discrete type, (nc, 1).</li>
+<li><strong>uid</strong> (<cite>list</cite> [ <cite>list</cite> ], (nc, 4)) – <p>For each control variable, the following variables are stored:</p>
+<dl class="docutils">
+<dt>type <span class="classifier-delimiter">:</span> <span class="classifier">{‘capacitor’, ‘transformer’, ‘generator’}</span></dt>
+<dd>Type of the controlled equipment.</dd>
+<dt>id\_ <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Identifier of the equipment</dd>
+<dt>varname <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>name of the controlled parameter</dd>
+<dt>ph <span class="classifier-delimiter">:</span> <span class="classifier"><cite>int</cite></span></dt>
+<dd>number of phases (not currently used)</dd>
 </dl>
-</p></li>
+</li>
 </ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.vvo.Vvo.addControl">
-<span class="sig-name descname"><span class="pre">addControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">properties</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.addControl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.addControl" title="Permalink to this definition"></a></dt>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pyvvo.vvo.Vvo.addControl">
+<code class="descname">addControl</code><span class="sig-paren">(</span><em>type</em>, <em>key</em>, <em>**properties</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.addControl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.addControl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a vvo control</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<em>{'capvvocontrol'</em><em>, </em><em>'trvvocontrol'</em><em>, </em><em>'invertervvocontrol'}</em>) – Vvo control type.</p></li>
-<li><p><strong>key</strong> (<cite>str</cite>) – Identifier of the controlled equipment.</p></li>
-<li><p><strong>**properties</strong> (<cite>dict</cite>) – Control properties.
-See <code class="docutils literal notranslate"><span class="pre">capvvocontrol</span></code>, <code class="docutils literal notranslate"><span class="pre">trvvocontrol</span></code> and <code class="docutils literal notranslate"><span class="pre">inverter</span></code>.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>type</strong> (<em>{'capvvocontrol'</em><em>, </em><em>'trvvocontrol'</em><em>, </em><em>'invertervvocontrol'}</em>) – Vvo control type.</li>
+<li><strong>key</strong> (<cite>str</cite>) – Identifier of the controlled equipment.</li>
+<li><strong>**properties</strong> (<cite>dict</cite>) – Control properties.
+See <code class="docutils literal notranslate"><span class="pre">capvvocontrol</span></code>, <code class="docutils literal notranslate"><span class="pre">trvvocontrol</span></code> and <code class="docutils literal notranslate"><span class="pre">inverter</span></code>.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">trvvocontrol</span></code> to the transformer <cite>reg1a</cite>, with 32 tap postions
+between 0.9 and 1.1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vvo</span><span class="o">.</span><span class="n">addControl</span><span class="p">(</span><span class="s1">&#39;trvvocontrol&#39;</span><span class="p">,</span> <span class="s1">&#39;reg1a&#39;</span><span class="p">,</span> <span class="n">MinTap</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">MaxTap</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">NumTaps</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.vvo.Vvo.optimize">
-<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_losses'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PSO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'v-load,</span> <span class="pre">kvar-cap,</span> <span class="pre">tap,</span> <span class="pre">fp-inv,</span> <span class="pre">kva-inv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'info,</span> <span class="pre">base,</span> <span class="pre">solver,</span> <span class="pre">opt'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.optimize" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.vvo.Vvo.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>goal='min_losses'</em>, <em>method='PSO'</em>, <em>penalties='v-load</em>, <em>kvar-cap</em>, <em>tap</em>, <em>fp-inv</em>, <em>kva-inv'</em>, <em>reports='info</em>, <em>base</em>, <em>solver</em>, <em>opt'</em>, <em>vnom_dv=1.0</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.optimize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the VVO optimization</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>goal</strong> (<em>{'min_losses'</em><em>, </em><em>'min_dv'}</em><em>, </em><em>by default 'min_losses'</em>) – Optimization goal, whether Losses or Voltage-deviation minimization.</p></li>
-<li><p><strong>method</strong> (<em>{'PSO'}</em><em>, </em><em>by default 'PSO'</em>) – Solution method (solver).</p></li>
-<li><p><strong>penalties</strong> (<cite>str</cite> or <cite>dict</cite>) – <p>A list of commad-separated penalty types to apply in the Vvo
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>goal</strong> (<em>{'min_losses'</em><em>, </em><em>'min_dv'}</em><em>, </em><em>by default 'min_losses'</em>) – Optimization goal, whether Losses or Voltage-deviation minimization.</li>
+<li><strong>method</strong> (<em>{'PSO'}</em><em>, </em><em>by default 'PSO'</em>) – Solution method (solver).</li>
+<li><strong>penalties</strong> (<cite>str</cite> or <cite>dict</cite>) – <p>A list of commad-separated penalty types to apply in the Vvo
 optimization process. Each penalty is associated with a specific
 optimization constraint, as following:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">v-load</span></code> : minimum/maximum voltage magnitude of the loads</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kvar-cap</span></code> : minimum/maximum capacitors’ kVar</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tap</span></code> : transformers’ lower and upper tap limits</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fp-inv</span></code> : minimum/maximum power factor of the inverter connection</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kva-inv</span></code> : maximum kVa generated at the inverter connection</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">v-load</span></code> : minimum/maximum voltage magnitude of the loads</li>
+<li><code class="docutils literal notranslate"><span class="pre">kvar-cap</span></code> : minimum/maximum capacitors’ kVar</li>
+<li><code class="docutils literal notranslate"><span class="pre">tap</span></code> : transformers’ lower and upper tap limits</li>
+<li><code class="docutils literal notranslate"><span class="pre">fp-inv</span></code> : minimum/maximum power factor of the inverter connection</li>
+<li><code class="docutils literal notranslate"><span class="pre">kva-inv</span></code> : maximum kVa generated at the inverter connection</li>
 </ul>
 <p>The default penalty factor for all penalties is 1e5, except for the
 <code class="docutils literal notranslate"><span class="pre">tap</span></code> penalty, whith has a factor of 1e6.
 If a <cite>dict</cite> is provided, the penalty factors are taken from the
 dictionary values.</p>
-</p></li>
-<li><p><strong>reports</strong> (<cite>list</cite> [ <cite>str</cite> ]) – <p>A list of reports to print. The following types are available:</p>
+</li>
+<li><strong>reports</strong> (<cite>list</cite> [ <cite>str</cite> ]) – <p>A list of reports to print. The following types are available:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span></code> : System information.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base_controls</span></code> : Controls adjustments and objective function
-of the base-case</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base_voltages</span></code> : Base-case full voltage report</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base</span></code> : Synonym for <code class="docutils literal notranslate"><span class="pre">'base_controls,</span> <span class="pre">base_voltages'</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base_loads</span></code> : Base-case load report</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base_vchart</span></code> : Base-case voltages chart.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">base_flows</span></code> : Base-case power flow report.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">solver_progress</span></code> : Solver progress report</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">solver_output</span></code> : Solver output report</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">solver</span></code> : Synonym for ‘<code class="docutils literal notranslate"><span class="pre">solver_progress</span></code>, <code class="docutils literal notranslate"><span class="pre">solver_progress</span></code>’</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opt_controls</span></code> : Optimal controls and objective function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">constraints</span></code> : Constraints report</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opt_voltages</span></code> : Voltage report at the optimal solution</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opt_flows</span></code> : Power flow report at the optimal solution</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fitness_plot</span></code> : Objective function along the iteration process.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opt_vchart</span></code> : Optimal voltage chart.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">opt</span></code> : Synonym for ‘<code class="docutils literal notranslate"><span class="pre">opt_controls</span></code>, <code class="docutils literal notranslate"><span class="pre">constraints</span></code>, <code class="docutils literal notranslate"><span class="pre">opt_voltages</span></code>,
-<code class="docutils literal notranslate"><span class="pre">opt_flows</span></code>, <code class="docutils literal notranslate"><span class="pre">fitness_plot</span></code>, <code class="docutils literal notranslate"><span class="pre">opt_vchart</span></code>’</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">info</span></code> : System information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">base_controls</span></code> : Controls adjustments and objective function
+of the base-case</li>
+<li><code class="docutils literal notranslate"><span class="pre">base_voltages</span></code> : Base-case full voltage report</li>
+<li><code class="docutils literal notranslate"><span class="pre">base</span></code> : Synonym for <code class="docutils literal notranslate"><span class="pre">'base_controls,</span> <span class="pre">base_voltages'</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">base_loads</span></code> : Base-case load report</li>
+<li><code class="docutils literal notranslate"><span class="pre">base_vchart</span></code> : Base-case voltages chart.</li>
+<li><code class="docutils literal notranslate"><span class="pre">base_flows</span></code> : Base-case power flow report.</li>
+<li><code class="docutils literal notranslate"><span class="pre">solver_progress</span></code> : Solver progress report</li>
+<li><code class="docutils literal notranslate"><span class="pre">solver_output</span></code> : Solver output report</li>
+<li><code class="docutils literal notranslate"><span class="pre">solver</span></code> : Synonym for ‘<code class="docutils literal notranslate"><span class="pre">solver_progress</span></code>, <code class="docutils literal notranslate"><span class="pre">solver_progress</span></code>’</li>
+<li><code class="docutils literal notranslate"><span class="pre">opt_controls</span></code> : Optimal controls and objective function</li>
+<li><code class="docutils literal notranslate"><span class="pre">constraints</span></code> : Constraints report</li>
+<li><code class="docutils literal notranslate"><span class="pre">opt_voltages</span></code> : Voltage report at the optimal solution</li>
+<li><code class="docutils literal notranslate"><span class="pre">opt_flows</span></code> : Power flow report at the optimal solution</li>
+<li><code class="docutils literal notranslate"><span class="pre">fitness_plot</span></code> : Objective function along the iteration process.</li>
+<li><code class="docutils literal notranslate"><span class="pre">opt_vchart</span></code> : Optimal voltage chart.</li>
+<li><code class="docutils literal notranslate"><span class="pre">opt</span></code> : Synonym for ‘<code class="docutils literal notranslate"><span class="pre">opt_controls</span></code>, <code class="docutils literal notranslate"><span class="pre">constraints</span></code>, <code class="docutils literal notranslate"><span class="pre">opt_voltages</span></code>,
+<code class="docutils literal notranslate"><span class="pre">opt_flows</span></code>, <code class="docutils literal notranslate"><span class="pre">fitness_plot</span></code>, <code class="docutils literal notranslate"><span class="pre">opt_vchart</span></code>’</li>
 </ul>
-</p></li>
-<li><p><strong>**options</strong> – Aditional keyworded arguments passed to the solver.</p></li>
+</li>
+<li><strong>vnom_dv</strong> (<cite>float</cite>, by default 1.) – Nominal voltage to assume in the minimum voltage-deviation goal.</li>
+<li><strong>**options</strong> – Aditional keyworded arguments passed to the solver.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.vvo.Vvo.readVvo">
-<span class="sig-name descname"><span class="pre">readVvo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vvofile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.readVvo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.readVvo" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.vvo.Vvo.readVvo">
+<code class="descname">readVvo</code><span class="sig-paren">(</span><em>vvofile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/vvo.html#Vvo.readVvo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.vvo.Vvo.readVvo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the OPF data from a .vvo file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>vvofile</strong> (<cite>str</cite>) – Path of the .vvo file</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vvofile</strong> (<cite>str</cite>) – Path of the .vvo file</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-pyvvo.loadflow">
-<span id="pyvvo-loadflow-module"></span><h2>pyvvo.loadflow module<a class="headerlink" href="#module-pyvvo.loadflow" title="Permalink to this headline"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyvvo.loadflow.Loadflow">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyvvo.loadflow.</span></span><span class="sig-name descname"><span class="pre">Loadflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loadmodel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow" title="Permalink to this definition"></a></dt>
+</div>
+<div class="section" id="module-pyvvo.loadflow">
+<span id="pyvvo-loadflow-module"></span><h2>pyvvo.loadflow module<a class="headerlink" href="#module-pyvvo.loadflow" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyvvo.loadflow.Loadflow">
+<em class="property">class </em><code class="descclassname">pyvvo.loadflow.</code><code class="descname">Loadflow</code><span class="sig-paren">(</span><em>grid=None</em>, <em>tol=1e-06</em>, <em>maxit=1000</em>, <em>filename=None</em>, <em>sbase=None</em>, <em>loadmodel=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to solve the three-phase unbalanced load flow problem</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>grid</strong> (<cite>powergrid</cite>) – Power system represented in the grid object.
-If not provided, a grid object will be generated based on <cite>filename</cite></p></li>
-<li><p><strong>filename</strong> (<cite>string</cite>, optional) – Optional filename to instantiate a grid object</p></li>
-<li><p><strong>tol</strong> (<cite>float</cite>, defaull 1e-6) – Tolerance for load flow convergence (error magnitude)</p></li>
-<li><p><strong>maxit</strong> (<cite>int</cite>, default 1000) – Maximum number of iterations</p></li>
-<li><p><strong>sbase</strong> (<em>float</em><em>, </em><em>optional</em>) – Base power for per-unit calculations, if grid is not provided.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>grid</strong> (<cite>powergrid</cite>) – Power system represented in the grid object.
+If not provided, a grid object will be generated based on <cite>filename</cite></li>
+<li><strong>filename</strong> (<cite>string</cite>, optional) – Optional filename to instantiate a grid object</li>
+<li><strong>tol</strong> (<cite>float</cite>, defaull 1e-6) – Tolerance for load flow convergence (error magnitude)</li>
+<li><strong>maxit</strong> (<cite>int</cite>, default 1000) – Maximum number of iterations</li>
+<li><strong>sbase</strong> (<em>float</em><em>, </em><em>optional</em>) – Base power for per-unit calculations, if grid is not provided.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Examples</p>
 <p>Run load flow on system ‘IEEE13mod.dss’ using the zbus method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">loadflow</span> <span class="kn">import</span> <span class="n">Loadflow</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">loadflow</span> <span class="k">import</span> <span class="n">Loadflow</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;IEEE13mod.dss&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lf</span> <span class="o">=</span> <span class="n">Loadflow</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loadflow</span><span class="o">.</span><span class="n">loadflow</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;zbus&#39;</span><span class="p">,</span> <span class="n">report</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.loadflow.Loadflow.gauss_seidel">
-<span class="sig-name descname"><span class="pre">gauss_seidel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.gauss_seidel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.gauss_seidel" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.loadflow.Loadflow.gauss_seidel">
+<code class="descname">gauss_seidel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.gauss_seidel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.gauss_seidel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves the Load flow using the Gauss-Seidel method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>solve status, where 0 means convergence, and 1 divergence
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">solve status, where 0 means convergence, and 1 divergence
 it (int): number of iterations performed
-err (float): maximum absolute error of voltage magnitude</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>status (int)</p>
-</dd>
-</dl>
+err (float): maximum absolute error of voltage magnitude</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">status (int)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.loadflow.Loadflow.loadflow">
-<span class="sig-name descname"><span class="pre">loadflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zbus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_opendss_voltages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.loadflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.loadflow" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.loadflow.Loadflow.loadflow">
+<code class="descname">loadflow</code><span class="sig-paren">(</span><em>method='zbus'</em>, <em>report=False</em>, <em>tol=None</em>, <em>times=False</em>, <em>show_opendss_voltages=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.loadflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.loadflow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs loadflow</p>
 <p>Runs the loadflow on a powergrid represented in the ‘grid’ object.
 The methods currently available are ‘zbus’ and ‘gauss-seidel’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method</strong> (<em>{'zbus'</em><em>, </em><em>'gauss-seidel'}</em>) – Load flow Method, by default ‘gauss-seidel’</p></li>
-<li><p><strong>tol</strong> (<cite>float</cite>, optional) – Tolerance (default 1e-6)</p></li>
-<li><p><strong>report</strong> (<cite>bool</cite>, default False) – Print an output report</p></li>
-<li><p><strong>timings</strong> (<cite>bool</cite>, default False) – Enable the timings report</p></li>
-<li><p><strong>show_opendss_voltages</strong> (<cite>bool</cite>, default False) – If True, import and print the voltage profile file generated by OpenDSS.
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method</strong> (<em>{'zbus'</em><em>, </em><em>'gauss-seidel'}</em>) – Load flow Method, by default ‘gauss-seidel’</li>
+<li><strong>tol</strong> (<cite>float</cite>, optional) – Tolerance (default 1e-6)</li>
+<li><strong>report</strong> (<cite>bool</cite>, default False) – Print an output report</li>
+<li><strong>timings</strong> (<cite>bool</cite>, default False) – Enable the timings report</li>
+<li><strong>show_opendss_voltages</strong> (<cite>bool</cite>, default False) – If True, import and print the voltage profile file generated by OpenDSS.
 A file named &lt;filename&gt;_VLN_Node.Txt should be present in the current
-folder.</p></li>
+folder.</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>status</strong> – solved status (0 for convergence, 1 otherwise)</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>status</strong> – solved status (0 for convergence, 1 otherwise)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Examples</p>
 <p>Run zbus load-flow on the IEEE13 feeder, and print a report.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loadflow</span> <span class="o">=</span> <span class="n">Loadflow</span><span class="p">(</span><span class="s2">&quot;IEEE13.dss&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loadflow</span> <span class="o">=</span> <span class="n">Loadflow</span><span class="p">(</span><span class="s2">&quot;IEEE13.dss&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loadflow</span><span class="o">.</span><span class="n">loadflow</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;zbus&#39;</span><span class="p">,</span> <span class="n">report</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.loadflow.Loadflow.zbus">
-<span class="sig-name descname"><span class="pre">zbus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.zbus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.zbus" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.loadflow.Loadflow.zbus">
+<code class="descname">zbus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/loadflow.html#Loadflow.zbus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.loadflow.Loadflow.zbus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves the Load flow using the Zbus method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>solve status, where 0 means convergence, and 1 divergence
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">solve status, where 0 means convergence, and 1 divergence
 it (int): number of iterations performed
-err (float): maximum absolute error of voltage magnitude</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>status (int)</p>
-</dd>
-</dl>
+err (float): maximum absolute error of voltage magnitude</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">status (int)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-pyvvo.powergrid">
-<span id="pyvvo-powergrid-module"></span><h2>pyvvo.powergrid module<a class="headerlink" href="#module-pyvvo.powergrid" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-pyvvo.powergrid">
+<span id="pyvvo-powergrid-module"></span><h2>pyvvo.powergrid module<a class="headerlink" href="#module-pyvvo.powergrid" title="Permalink to this headline">¶</a></h2>
 <p>A class to represent a bus-branch model of a power system</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyvvo.powergrid.</span></span><span class="sig-name descname"><span class="pre">Powergrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linecode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regcontrol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid" title="Permalink to this definition"></a></dt>
+<dl class="class">
+<dt id="pyvvo.powergrid.Powergrid">
+<em class="property">class </em><code class="descclassname">pyvvo.powergrid.</code><code class="descname">Powergrid</code><span class="sig-paren">(</span><em>circuit={}</em>, <em>line={}</em>, <em>linecode={}</em>, <em>transformer={}</em>, <em>regcontrol={}</em>, <em>load={}</em>, <em>capacitor={}</em>, <em>generator={}</em>, <em>sbase=None</em>, <em>times=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to represent a bus-branch model of a power system.</p>
 <p>Models for elements of power distribution and conversion: lines,
 transformers, regulators, capacitors and loads.
 All components are handled in a per-node basis, which enables the class
 to natively represent a natural (unbalanced) power network.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>circuit</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a multi-phase voltage source. The key <cite>str</cite> is the circuit
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>circuit</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a multi-phase voltage source. The key <cite>str</cite> is the circuit
 (source) name. The internal subkeys (properties) can be as follows:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of the source bus</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">basekv</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>rated Line-to-line kV</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">pu</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Actual per unit operating voltage</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Base angle of the first phase (in degrees)</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">MVAsc3</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>3-phase short circuit MVA</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">MVAsc1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>1-phase short circuit MVA</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of the source bus</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">basekv</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>rated Line-to-line kV</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pu</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Actual per unit operating voltage</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">angle</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Base angle of the first phase (in degrees)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MVAsc3</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>3-phase short circuit MVA</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MVAsc1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>1-phase short circuit MVA</dd>
 </dl>
-</p></li>
-<li><p><strong>line</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a multi-phase line or cable. The key <cite>str</cite> is the line name.
+</li>
+<li><strong>line</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a multi-phase line or cable. The key <cite>str</cite> is the line name.
 The subkeys of the internal <cite>dict</cite> are:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of bus and the correponding nodes of terminal 1.
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of bus and the correponding nodes of terminal 1.
 The nodes should be provided in the following way: ‘bus.1.2.3’
-If missing, the  phase sequence ‘123’ is assumed.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">bus2</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of bus and the correponding nodes of terminal 2</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Linecode</span></code><span class="classifier"><cite>str</cite>, optional</span></dt><dd><p>Name of the associated <cite>linecode</cite> object with impedance definitions</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Length</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Line length</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">R1,</span> <span class="pre">X1,</span> <span class="pre">R0,</span> <span class="pre">X0</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Positive and zero-sequence resistances, and reactances, in
-ohms per unit length.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">C1,</span> <span class="pre">C0</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Positive and zero-sequence capacitances (nF / unit length)</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">units</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Length units.</p>
-</dd>
+If missing, the  phase sequence ‘123’ is assumed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bus2</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of bus and the correponding nodes of terminal 2</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Linecode</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite>, optional</span></dt>
+<dd>Name of the associated <cite>linecode</cite> object with impedance definitions</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Length</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Line length</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">R1,</span> <span class="pre">X1,</span> <span class="pre">R0,</span> <span class="pre">X0</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Positive and zero-sequence resistances, and reactances, in
+ohms per unit length.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">C1,</span> <span class="pre">C0</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Positive and zero-sequence capacitances (nF / unit length)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">units</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Length units.</dd>
 </dl>
-</p></li>
-<li><p><strong>transformer</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a three- or single-phase transformer. The key is the
+</li>
+<li><strong>transformer</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Represents a three- or single-phase transformer. The key is the
 element name. The main properties are:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Number of phases</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Windings</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Number of windings</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">XHL</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Percent high-to-low reactance</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Number of phases</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Windings</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Number of windings</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">XHL</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Percent high-to-low reactance</dd>
 </dl>
 <p>The following properties are read sequentially, for each winding:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">Wdg</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Winding integer identification</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Bus</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Bus (and nodes) to which the winding is conneted</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code><span class="classifier">{ ‘wye’, ‘delta’ }</span></dt><dd><p>Connection type of the winding</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Rated kV</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kva</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Base kva rating of the winding</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">%R</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Percent resistance on the rated kva base</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">%Tap</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Per-unit tap of the winding</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Wdg</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Winding integer identification</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Bus</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Bus (and nodes) to which the winding is conneted</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">{ ‘wye’, ‘delta’ }</span></dt>
+<dd>Connection type of the winding</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Rated kV</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kva</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Base kva rating of the winding</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">%R</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Percent resistance on the rated kva base</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">%Tap</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Per-unit tap of the winding</dd>
 </dl>
 <p>Alternatively, the previous properties can be set for
 all windings at once, by using the following keys:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">Buses</span></code><span class="classifier"><cite>str</cite> (array_like)</span></dt><dd><p>Array of bus-nodes definitions</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Conns</span></code><span class="classifier"><cite>str</cite> (array_like)</span></dt><dd><p>Array of winding connections</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kVs</span></code><span class="classifier"><cite>str</cite> (array_like)</span></dt><dd><p>Array of rated kVs</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kvas</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Array of the rated kvas</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Taps</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Array of per-unit taps</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">%Rs</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Array of percent resistances</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">Buses</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (array_like)</span></dt>
+<dd>Array of bus-nodes definitions</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Conns</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (array_like)</span></dt>
+<dd>Array of winding connections</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kVs</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (array_like)</span></dt>
+<dd>Array of rated kVs</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kvas</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Array of the rated kvas</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Taps</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Array of per-unit taps</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">%Rs</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Array of percent resistances</dd>
 </dl>
-</p></li>
-<li><p><strong>regcontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Voltage regulator model (currenly not used by PYDSE)</p></li>
-<li><p><strong>load</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Multi-phase load model. The key <cite>str</cite> is the load identification.
+</li>
+<li><strong>regcontrol</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Voltage regulator model (currenly not used by PYDSE)</li>
+<li><strong>load</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Multi-phase load model. The key <cite>str</cite> is the load identification.
 The internal properties are:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of the bus (and nodes) to which the load is connected.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code><span class="classifier"><cite>str</cite> (int like)</span></dt><dd><p>Number of phases</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Nominal voltage.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kW</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Nominal active power</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kvar</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Base kvar</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Model</span></code><span class="classifier">{‘1’, ‘2’ , ‘5’}, where:</span></dt><dd><p>1 is Constant power
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of the bus (and nodes) to which the load is connected.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (int like)</span></dt>
+<dd>Number of phases</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Nominal voltage.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kW</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Nominal active power</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kvar</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Base kvar</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Model</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">{‘1’, ‘2’ , ‘5’}, where:</span></dt>
+<dd>1 is Constant power
 2 is Constant admittance
-5 is Constant current</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code><span class="classifier">{‘wye’, ‘delta’}</span></dt><dd><p>Connection type.</p>
-</dd>
+5 is Constant current</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">{‘wye’, ‘delta’}</span></dt>
+<dd>Connection type.</dd>
 </dl>
-</p></li>
-<li><p><strong>generator</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Multi-phase generator. The key <cite>str</cite> is the generator identification.
+</li>
+<li><strong>generator</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Multi-phase generator. The key <cite>str</cite> is the generator identification.
 The internal properties are:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of the bus (and nodes) to which the generator is connected.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code><span class="classifier"><cite>str</cite> (int like)</span></dt><dd><p>Number of phases</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Nominal voltage.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kW</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Nominal active power</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kvar</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Base kvar</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Model</span></code><span class="classifier">{‘1’}, where:</span></dt><dd><p>1 is Constant power</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code><span class="classifier">{‘wye’, ‘delta’}</span></dt><dd><p>Connection type.</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of the bus (and nodes) to which the generator is connected.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (int like)</span></dt>
+<dd>Number of phases</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Nominal voltage.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kW</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Nominal active power</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kvar</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Base kvar</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Model</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">{‘1’}, where:</span></dt>
+<dd>1 is Constant power</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Conn</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">{‘wye’, ‘delta’}</span></dt>
+<dd>Connection type.</dd>
 </dl>
-</p></li>
-<li><p><strong>capacitor</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Shunt (grounded) capacitor model. The key <cite>str</cite> is the element name.
+</li>
+<li><strong>capacitor</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – <p>Shunt (grounded) capacitor model. The key <cite>str</cite> is the element name.
 The properties are:</p>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code><span class="classifier"><cite>str</cite></span></dt><dd><p>Name of the bus (and nodes) to which the element is connected.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code><span class="classifier"><cite>str</cite> (int like)</span></dt><dd><p>Number of phases</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Rated kv</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">kVar</span></code><span class="classifier"><cite>str</cite> (float like)</span></dt><dd><p>Rated kvar (total of all phases)</p>
-</dd>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">bus1</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite></span></dt>
+<dd>Name of the bus (and nodes) to which the element is connected.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Phases</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (int like)</span></dt>
+<dd>Number of phases</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kV</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Rated kv</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kVar</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><cite>str</cite> (float like)</span></dt>
+<dd>Rated kvar (total of all phases)</dd>
 </dl>
-</p></li>
-<li><p><strong>branches</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Associative array where the keys are the branch elements and the
-values are the processed parameters</p></li>
-<li><p><strong>busnodes</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Associative array where the keys are the bus numbers, and the values
+</li>
+<li><strong>branches</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Associative array where the keys are the branch elements and the
+values are the processed parameters</li>
+<li><strong>busnodes</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>dict</cite>]) – Associative array where the keys are the bus numbers, and the values
 are the numering indices associated to each node.
-This array defines the bus-node order of the voltage and current arrays.</p></li>
-<li><p><strong>orderbus</strong> (<cite>dict</cite> [<cite>str, `int</cite>]) – Array mapping bus names and the corresponding order position.</p></li>
-<li><p><strong>orderbusn</strong> (<cite>dict</cite> [<cite>str, `int</cite>]) – Array mapping bus names with nodes and the corresponding order position.</p></li>
-<li><p><strong>nbus</strong> (<cite>int</cite>) – Total number of buses</p></li>
-<li><p><strong>nnodes</strong> (<cite>int</cite>) – Total number of nodes</p></li>
-<li><p><strong>nbr</strong> (<cite>int</cite>) – Number of branches</p></li>
-<li><p><strong>nbrp</strong> (<cite>int</cite>) – Number of individual branches</p></li>
-<li><p><strong>dss</strong> (<cite>pyopendss.Dss</cite> object, default None) – It will have the Dss object when readfromdss is called.</p></li>
-<li><p><strong>sysname</strong> (<cite>str</cite>) – Name of the network, as read in the circuit attribute.</p></li>
-<li><p><strong>filepath</strong> (<cite>str</cite>) – Stores the filename the system data was read from.</p></li>
-<li><p><strong>sub_bus</strong> (<cite>str</cite>) – Name of the substation (source) bus, as read in <cite>circuit</cite> attribute.</p></li>
-<li><p><strong>sub_nph</strong> (<cite>int</cite>) – Number of phases in the substation</p></li>
-<li><p><strong>sub_kv</strong> (<cite>float</cite>) – Voltage level of the substation</p></li>
-<li><p><strong>S</strong> (<em>E</em><em>, </em><em>I</em><em>,</em>) – Complex nodal voltages (line-to-neutral), currents and power injections
-injections, of size <cite>nnodes</cite>.</p></li>
-<li><p><strong>Ell</strong> (<cite>numpy.array</cite>) – Complex Line-to-line voltages</p></li>
-<li><p><strong>Skm</strong> (<em>Ikm</em><em>,</em>) – Complex branch currents and power flows</p></li>
-<li><p><strong>Y</strong> (<cite>numpy.array</cite> of <cite>complex</cite> (<cite>nnodes</cite>, <cite>nnodes</cite>)) – Complex Admittance Matrix</p></li>
-<li><p><strong>H</strong> (<cite>networkx.MultiDiGraph</cite>) – Graph of the network.</p></li>
-<li><p><strong>sweepfromroot</strong> (<cite>networkx.DiGraph</cite>) – Orderd Graph that will hold the branches ordered with respect to
-the substation distance (see <cite>calc_Vbase</cite> for more detauls)</p></li>
-<li><p><strong>vbase</strong> (<cite>numpy.array</cite> (<cite>nnodes</cite>,)) – Line-to-Line Voltage base defined for each node (see <cite>calc_Vbase</cite>)</p></li>
-<li><p><strong>initv</strong> (<cite>numpy.array</cite> (<cite>nnodes</cite>,)) – Per-unit complex number assigned to each node , for initialization
-purposes (see <cite>calc_Vbase</cite> for more details)</p></li>
-<li><p><strong>trbus1</strong> (<cite>list</cite> [<cite>str</cite>]) – List of transformers’ primary buses</p></li>
-<li><p><strong>trbus2</strong> (<cite>list</cite> [<cite>str</cite>]) – List of transformers’ secondary buses</p></li>
-<li><p><strong>times</strong> (<cite>bool</cite>, default False) – Enables time measuring, if True</p></li>
-<li><p><strong>times_data</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>float</cite>]) – Array where the keys are function markers and the values
-are the corresponding computing times (enabled if <cite>times</cite> is True)</p></li>
+This array defines the bus-node order of the voltage and current arrays.</li>
+<li><strong>orderbus</strong> (<cite>dict</cite> [<cite>str, `int</cite>]) – Array mapping bus names and the corresponding order position.</li>
+<li><strong>orderbusn</strong> (<cite>dict</cite> [<cite>str, `int</cite>]) – Array mapping bus names with nodes and the corresponding order position.</li>
+<li><strong>nbus</strong> (<cite>int</cite>) – Total number of buses</li>
+<li><strong>nnodes</strong> (<cite>int</cite>) – Total number of nodes</li>
+<li><strong>nbr</strong> (<cite>int</cite>) – Number of branches</li>
+<li><strong>nbrp</strong> (<cite>int</cite>) – Number of individual branches</li>
+<li><strong>dss</strong> (<cite>pyopendss.Dss</cite> object, default None) – It will have the Dss object when readfromdss is called.</li>
+<li><strong>sysname</strong> (<cite>str</cite>) – Name of the network, as read in the circuit attribute.</li>
+<li><strong>filepath</strong> (<cite>str</cite>) – Stores the filename the system data was read from.</li>
+<li><strong>sub_bus</strong> (<cite>str</cite>) – Name of the substation (source) bus, as read in <cite>circuit</cite> attribute.</li>
+<li><strong>sub_nph</strong> (<cite>int</cite>) – Number of phases in the substation</li>
+<li><strong>sub_kv</strong> (<cite>float</cite>) – Voltage level of the substation</li>
+<li><strong>I</strong><strong>, </strong><strong>S</strong> (<em>E</em><em>,</em>) – Complex nodal voltages (line-to-neutral), currents and power injections
+injections, of size <cite>nnodes</cite>.</li>
+<li><strong>Ell</strong> (<cite>numpy.array</cite>) – Complex Line-to-line voltages</li>
+<li><strong>Skm</strong> (<em>Ikm</em><em>,</em>) – Complex branch currents and power flows</li>
+<li><strong>Y</strong> (<cite>numpy.array</cite> of <cite>complex</cite> (<cite>nnodes</cite>, <cite>nnodes</cite>)) – Complex Admittance Matrix</li>
+<li><strong>H</strong> (<cite>networkx.MultiDiGraph</cite>) – Graph of the network.</li>
+<li><strong>sweepfromroot</strong> (<cite>networkx.DiGraph</cite>) – Orderd Graph that will hold the branches ordered with respect to
+the substation distance (see <cite>calc_Vbase</cite> for more detauls)</li>
+<li><strong>vbase</strong> (<cite>numpy.array</cite> (<cite>nnodes</cite>,)) – Line-to-Line Voltage base defined for each node (see <cite>calc_Vbase</cite>)</li>
+<li><strong>initv</strong> (<cite>numpy.array</cite> (<cite>nnodes</cite>,)) – Per-unit complex number assigned to each node , for initialization
+purposes (see <cite>calc_Vbase</cite> for more details)</li>
+<li><strong>trbus1</strong> (<cite>list</cite> [<cite>str</cite>]) – List of transformers’ primary buses</li>
+<li><strong>trbus2</strong> (<cite>list</cite> [<cite>str</cite>]) – List of transformers’ secondary buses</li>
+<li><strong>times</strong> (<cite>bool</cite>, default False) – Enables time measuring, if True</li>
+<li><strong>times_data</strong> (<cite>dict</cite> [<cite>str</cite>, <cite>float</cite>]) – Array where the keys are function markers and the values
+are the corresponding computing times (enabled if <cite>times</cite> is True)</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="first admonition-title">Note</p>
 <p>Example of valid bus identifiers:</p>
 <p><code class="docutils literal notranslate"><span class="pre">300.1.2.3</span></code> (bus 300 with nodes 1, 2 and 3)</p>
 <p><code class="docutils literal notranslate"><span class="pre">400.1.2</span></code> (bus 400 with nodes 1 and 2)</p>
-<p><code class="docutils literal notranslate"><span class="pre">SRC</span></code> (bus SRC, with nodes 1 to 3 depending on the number of phases)</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">SRC</span></code> (bus SRC, with nodes 1 to 3 depending on the number of phases)</p>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.Losses">
-<span class="sig-name descname"><span class="pre">Losses</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.Losses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.Losses" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.Losses">
+<code class="descname">Losses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.Losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.Losses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate active and reactive losses</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.build_Y">
-<span class="sig-name descname"><span class="pre">build_Y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.build_Y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.build_Y" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.build_Y">
+<code class="descname">build_Y</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.build_Y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.build_Y" title="Permalink to this definition">¶</a></dt>
 <dd><p>Builds the nodal admittance matrix</p>
 <p>The admittance matrix is first build considering a complete 3-phase system.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.busbranch">
-<span class="sig-name descname"><span class="pre">busbranch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.busbranch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.busbranch" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.busbranch">
+<code class="descname">busbranch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.busbranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.busbranch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the bus-branch model of the network</p>
 <p>The bus-branch representation of the system is defined in terms of
 nodes and edges, which are modeled in the <cite>busnodes</cite> and <cite>branches</cite>
@@ -588,48 +718,53 @@ associative arrays. The representation of most elements of the system
 follows the OpenDSS standard.</p>
 <p class="rubric">Notes</p>
 <ol class="arabic">
-<li><p>The following equipment are currently accepted:</p>
+<li><p class="first">The following equipment are currently accepted:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>multi-phase lines</p></li>
-<li><p>multi-phase transformers</p></li>
-<li><p>multi-phase capacitors (assumed as current injections)</p></li>
+<li>multi-phase lines</li>
+<li>multi-phase transformers</li>
+<li>multi-phase capacitors (assumed as current injections)</li>
 </ul>
 <p>The parameters are included in its original states (ohms, siemens,
 and so forth). The series and shunt line parameters can be provided
 in terms of impedance matrices or sequency matrices.</p>
 </div></blockquote>
 </li>
-<li><p>The order assumed for each bus and nodes is defined according to the
+<li><p class="first">The order assumed for each bus and nodes is defined according to the
 branch reading sequence (lines then transformers). The <cite>orderbus</cite> and
-<cite>orderbusn</cite> hold the bus-node sequence for subsequent references.</p></li>
+<cite>orderbusn</cite> hold the bus-node sequence for subsequent references.</p>
+</li>
 </ol>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.calc_Ell">
-<span class="sig-name descname"><span class="pre">calc_Ell</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Ell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Ell" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.calc_Ell">
+<code class="descname">calc_Ell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Ell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Ell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate line-to-line voltages</p>
 <p>The line-to-line voltages are computed based on the line-to neutral voltages</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.calc_Il">
-<span class="sig-name descname"><span class="pre">calc_Il</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loadmodel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Il"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Il" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.calc_Il">
+<code class="descname">calc_Il</code><span class="sig-paren">(</span><em>E=[]</em>, <em>loadmodel=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Il"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Il" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the currents drawn by loads and shunt capacitors</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>E</strong> (<em>array like</em><em>, </em><em>optional</em>) – Nodal voltage vector. If not provided, self.E is assumed</p></li>
-<li><p><strong>loadmodel</strong> (<em>{'1'</em><em>, </em><em>'2'</em><em>, </em><em>'5'}</em><em>, </em><em>optional</em>) – Load model to assume for all loads. If provided, overrides the individual load models.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>E</strong> (<em>array like</em><em>, </em><em>optional</em>) – Nodal voltage vector. If not provided, self.E is assumed</li>
+<li><strong>loadmodel</strong> (<em>{'1'</em><em>, </em><em>'2'</em><em>, </em><em>'5'}</em><em>, </em><em>optional</em>) – Load model to assume for all loads. If provided, overrides the individual load models.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.calc_Vbase">
-<span class="sig-name descname"><span class="pre">calc_Vbase</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Vbase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Vbase" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.calc_Vbase">
+<code class="descname">calc_Vbase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.calc_Vbase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.calc_Vbase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the voltage bases for the system</p>
 <p>The method is based on the analysis of the network graph (sweepfromroot).
 Starting from the root node, each edge is traversed and the terminal-bus voltage
@@ -638,100 +773,117 @@ branch. For lines, this ratio is unitary. For transformers, it is defined based
 on the transformer ratio.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.flowsAndInjections">
-<span class="sig-name descname"><span class="pre">flowsAndInjections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.flowsAndInjections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.flowsAndInjections" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.flowsAndInjections">
+<code class="descname">flowsAndInjections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.flowsAndInjections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.flowsAndInjections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate current/power flows and injections</p>
 <p>This method calculates both current and power flows and injections,
 based on the available complex voltages</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.fromdss">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromdss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sbase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.fromdss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.fromdss" title="Permalink to this definition"></a></dt>
+<dl class="classmethod">
+<dt id="pyvvo.powergrid.Powergrid.fromdss">
+<em class="property">classmethod </em><code class="descname">fromdss</code><span class="sig-paren">(</span><em>filepath</em>, <em>sbase=None</em>, <em>times=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.fromdss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.fromdss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a Powergrid object from an OpenDSS data file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filepath</strong> (<cite>str</cite>) – Path of the OpenDSS file</p></li>
-<li><p><strong>sbase</strong> (<cite>float</cite>, optional) – Nominal power base (experimental)</p></li>
-<li><p><strong>times</strong> (<em>bool</em><em>, </em><em>optional</em>) – Activate the meausuring of computing times, by default False</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filepath</strong> (<cite>str</cite>) – Path of the OpenDSS file</li>
+<li><strong>sbase</strong> (<cite>float</cite>, optional) – Nominal power base (experimental)</li>
+<li><strong>times</strong> (<em>bool</em><em>, </em><em>optional</em>) – Activate the meausuring of computing times, by default False</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.init_E">
-<span class="sig-name descname"><span class="pre">init_E</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.init_E"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.init_E" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.init_E">
+<code class="descname">init_E</code><span class="sig-paren">(</span><em>mult=[1.0, 1.0, 1.0], new=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.init_E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.init_E" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize line-to-neutral voltages</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mult</strong> (<em>array like</em><em>, </em><em>optional</em>) – Multiplication factor to add to each phase magnitude, by default [1.,1.,1.]</p></li>
-<li><p><strong>new</strong> (<em>bool</em><em>, </em><em>by default True</em>) – Activates the new initialization method, based on the network grapy</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mult</strong> (<em>array like</em><em>, </em><em>optional</em>) – Multiplication factor to add to each phase magnitude, by default [1.,1.,1.]</li>
+<li><strong>new</strong> (<em>bool</em><em>, </em><em>by default True</em>) – Activates the new initialization method, based on the network grapy</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.reorder_e">
-<span class="sig-name descname"><span class="pre">reorder_e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orderbusn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.reorder_e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.reorder_e" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.reorder_e">
+<code class="descname">reorder_e</code><span class="sig-paren">(</span><em>orderbusn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.reorder_e"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.reorder_e" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a new (reordered) voltage vector and voltage base</p>
 <p>The new bus order is provided as a list (orderbusn) with buses and nodes.
 The class voltage vector (self.E) is not modified</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>orderbusn</strong> (<em>list of buses and nodes</em><em> (</em><em>of kind 'bus.1.2.3'</em><em>)</em>) – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><em>E, array like</em> – Reorderd voltage vector</p></li>
-<li><p><em>vbase, array like</em> – Reorderd vbase list</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>orderbusn</strong> (<em>list of buses and nodes</em><em> (</em><em>of kind 'bus.1.2.3'</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><em>E, array like</em> – Reorderd voltage vector</li>
+<li><em>vbase, array like</em> – Reorderd vbase list</li>
 </ul>
-</p>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.udpateParam">
-<span class="sig-name descname"><span class="pre">udpateParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.udpateParam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.udpateParam" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.udpateParam">
+<code class="descname">udpateParam</code><span class="sig-paren">(</span><em>device_type</em>, <em>id_</em>, <em>varname</em>, <em>value</em>, <em>phases=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.udpateParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.udpateParam" title="Permalink to this definition">¶</a></dt>
 <dd><p>_summary_</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>device_type</strong> (<em>_type_</em>) – _description_</p></li>
-<li><p><strong>id</strong> (<em>_type_</em>) – _description_</p></li>
-<li><p><strong>varname</strong> (<em>_type_</em>) – _description_</p></li>
-<li><p><strong>value</strong> (<em>float</em>) – _description_</p></li>
-<li><p><strong>phases</strong> (<em>_type_</em><em>, </em><em>optional</em>) – _description_, by default None</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device_type</strong> (<em>_type_</em>) – _description_</li>
+<li><strong>id</strong> (<em>_type_</em>) – _description_</li>
+<li><strong>varname</strong> (<em>_type_</em>) – _description_</li>
+<li><strong>value</strong> (<em>float</em>) – _description_</li>
+<li><strong>phases</strong> (<em>_type_</em><em>, </em><em>optional</em>) – _description_, by default None</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.powergrid.Powergrid.voltageDeviation">
-<span class="sig-name descname"><span class="pre">voltageDeviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_nominal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.voltageDeviation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.voltageDeviation" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.powergrid.Powergrid.voltageDeviation">
+<code class="descname">voltageDeviation</code><span class="sig-paren">(</span><em>v_nominal=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/powergrid.html#Powergrid.voltageDeviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.powergrid.Powergrid.voltageDeviation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the voltage deviation arount the nominal values</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v_nominal</strong> (<cite>float</cite>, default 1.) – Per-unit nominal voltage</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v_nominal</strong> (<cite>float</cite>, default 1.) – Per-unit nominal voltage</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-pyvvo.pyopendss">
-<span id="pyvvo-pyopendss-module"></span><h2>pyvvo.pyopendss module<a class="headerlink" href="#module-pyvvo.pyopendss" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-pyvvo.pyopendss">
+<span id="pyvvo-pyopendss-module"></span><h2>pyvvo.pyopendss module<a class="headerlink" href="#module-pyvvo.pyopendss" title="Permalink to this headline">¶</a></h2>
 <p>An interface class to read OpenDSS data files</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyvvo.pyopendss.</span></span><span class="sig-name descname"><span class="pre">Dss</span></span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss" title="Permalink to this definition"></a></dt>
+<dl class="class">
+<dt id="pyvvo.pyopendss.Dss">
+<em class="property">class </em><code class="descclassname">pyvvo.pyopendss.</code><code class="descname">Dss</code><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>An interface class to read OpenDSS data files</p>
 <p>The .dss file format is essentially a text-based command language script
@@ -744,200 +896,216 @@ For a full reference of the OpenDSS command language syntax, please refer to
 [1].</p>
 <p class="rubric">Notes</p>
 <p>Currently, the specific implementation of the .dss codes in PyDSE is as follows:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 82%" />
+<col width="18%" />
+<col width="82%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Circuit</span></code></p></td>
-<td><p>Implements a multi-phase voltage source. PyDSE defines the substation</p>
-<p>voltage and angle from the basekv and angle tags.</p>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Circuit</span></code></td>
+<td><p class="first">Implements a multi-phase voltage source. PyDSE defines the substation</p>
+<p class="last">voltage and angle from the basekv and angle tags.</p>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Line</span></code></p></td>
-<td><p>Models a multi-phase lines or cables, as a <span class="math notranslate nohighlight">\(pi\)</span> model with series</p>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Line</span></code></td>
+<td><p class="first">Models a multi-phase lines or cables, as a  model with series</p>
 <p>and shunt capacitance. The parameters can be provided as symmetrical</p>
 <p>components or impedance matrices (most usual), by assigning it to a</p>
-<p><code class="docutils literal notranslate"><span class="pre">Linecode</span></code> object.</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">Linecode</span></code> object.</p>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Linecode</span></code></p></td>
-<td><p>Stores the impedance characteristics for lines and cables.</p></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Linecode</span></code></td>
+<td>Stores the impedance characteristics for lines and cables.</td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Transformer</span></code></p></td>
-<td><p>Implements a three or single phase-transformer. connected either as</p>
-<p>as ‘wye’ or ‘delta’.</p>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Transformer</span></code></td>
+<td><p class="first">Implements a three or single phase-transformer. connected either as</p>
+<p class="last">as ‘wye’ or ‘delta’.</p>
 </td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Regcontrol</span></code></p></td>
-<td><p>in PyDSE, a voltage regulator is considered as a transformer with</p>
-<p>fixed ratio.</p>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Regcontrol</span></code></td>
+<td><p class="first">in PyDSE, a voltage regulator is considered as a transformer with</p>
+<p class="last">fixed ratio.</p>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Capacitor</span></code></p></td>
-<td><p>Multi-phase shunt (grounded) capacitor.</p></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Capacitor</span></code></td>
+<td>Multi-phase shunt (grounded) capacitor.</td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Load</span></code></p></td>
-<td><p>Multi-phase ‘wye’ or ‘delta’ connected load. PyDSE implements most</p>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Load</span></code></td>
+<td><p class="first">Multi-phase ‘wye’ or ‘delta’ connected load. PyDSE implements most</p>
 <p>of the .dss load modes, such as constant power (type 1), constant</p>
-<p>impedance (type 2) and constant current (type 5).</p>
+<p class="last">impedance (type 2) and constant current (type 5).</p>
 </td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Generator</span></code></p></td>
-<td><p>Multi-phase ‘wye’ or ‘delta’, constant PQ generator.</p></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Generator</span></code></td>
+<td>Multi-phase ‘wye’ or ‘delta’, constant PQ generator.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Powergrid</span></code></p>
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Powergrid</span></code></p>
 </div>
 <p class="rubric">References</p>
 <p>..[1] <a class="reference external" href="https://www.epri.com/pages/sa/opendss">https://www.epri.com/pages/sa/opendss</a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_capacitor">
-<span class="sig-name descname"><span class="pre">post_process_capacitor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_capacitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_capacitor" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">capacitor</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_circuit">
-<span class="sig-name descname"><span class="pre">post_process_circuit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_circuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_circuit" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">circuit</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_generator">
-<span class="sig-name descname"><span class="pre">post_process_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_generator" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">generator</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_line">
-<span class="sig-name descname"><span class="pre">post_process_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_line" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">line</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_linecode">
-<span class="sig-name descname"><span class="pre">post_process_linecode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_linecode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_linecode" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">linecode</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.post_process_transformer">
-<span class="sig-name descname"><span class="pre">post_process_transformer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.post_process_transformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.post_process_transformer" title="Permalink to this definition"></a></dt>
-<dd><p>Additional parsing of <code class="docutils literal notranslate"><span class="pre">transformer</span></code> codes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.read" title="Permalink to this definition"></a></dt>
+<dl class="method">
+<dt id="pyvvo.pyopendss.Dss.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>filepath</em>, <em>redirect=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an OpenDSS file (.dss) to a set dictionaries related to power elements</p>
 <p>The <cite>read</cite> method reads an OpenDSS file, parse and store its contents in
 dictionaries of <cite>circuit</cite>, <cite>line</cite>, <cite>transformer</cite>, <cite>regcontrol</cite>, <cite>load</cite>,
 <cite>capacitor</cite> and <cite>linecode</cite>. Currently, the function accepts the OpenDSS
 commands <cite>new</cite> and <cite>Redirect</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filepath</strong> (<cite>str</cite>) – OpenDSS filepath to read</p></li>
-<li><p><strong>redirect</strong> (<em>bool</em><em>, </em><em>optional</em>) – Recursive flag for the <cite>redirect</cite> code, by default False</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filepath</strong> (<cite>str</cite>) – OpenDSS filepath to read</li>
+<li><strong>redirect</strong> (<em>bool</em><em>, </em><em>optional</em>) – Recursive flag for the <cite>redirect</cite> code, by default False</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Examples</p>
 <p>Create a Dss object from the file ‘IEEE13.dss’ and print the linecodes read.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyopendss</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyopendss</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dss</span> <span class="o">=</span> <span class="n">pyopendss</span><span class="o">.</span><span class="n">Dss</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;IEEE13.dss)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dss</span><span class="o">.</span><span class="n">linecode</span><span class="s1">&#39;)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.read_vln_vll">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read_vln_vll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.read_vln_vll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.read_vln_vll" title="Permalink to this definition"></a></dt>
+<dl class="staticmethod">
+<dt id="pyvvo.pyopendss.Dss.read_vln_vll">
+<em class="property">static </em><code class="descname">read_vln_vll</code><span class="sig-paren">(</span><em>filepath</em>, <em>source</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.read_vln_vll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.read_vln_vll" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read voltage output generated by OpenDSS</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filepath</strong> (<cite>str</cite>) – OpenDSS file</p></li>
-<li><p><strong>source</strong> (<cite>str</cite>) – Name of the source bus</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> (<cite>str</cite>) – OpenDSS file</li>
+<li><strong>source</strong> (<cite>str</cite>) – Name of the source bus</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>vv</strong> – Dataframe holding line-to-neutral and line-to-line voltages.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>pandas.Dataframe</cite></p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>vv</strong> – Dataframe holding line-to-neutral and line-to-line voltages.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><cite>pandas.Dataframe</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="pyvvo.pyopendss.Dss.yfromcsv">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">yfromcsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.yfromcsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.yfromcsv" title="Permalink to this definition"></a></dt>
+<dl class="staticmethod">
+<dt id="pyvvo.pyopendss.Dss.yfromcsv">
+<em class="property">static </em><code class="descname">yfromcsv</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/pyopendss.html#Dss.yfromcsv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.pyopendss.Dss.yfromcsv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves an Admittance matrix generated by OpenDSS from a csv file</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-pyvvo.gridutils">
-<span id="pyvvo-gridutils-module"></span><h2>pyvvo.gridutils module<a class="headerlink" href="#module-pyvvo.gridutils" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="pyvvo.gridutils.summary_dse">
-<span class="sig-prename descclassname"><span class="pre">pyvvo.gridutils.</span></span><span class="sig-name descname"><span class="pre">summary_dse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">it</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxabserr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ikm_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reportmeas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reportv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reporti</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/gridutils.html#summary_dse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.gridutils.summary_dse" title="Permalink to this definition"></a></dt>
+</div>
+<div class="section" id="module-pyvvo.gridutils">
+<span id="pyvvo-gridutils-module"></span><h2>pyvvo.gridutils module<a class="headerlink" href="#module-pyvvo.gridutils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyvvo.gridutils.summary_dse">
+<code class="descclassname">pyvvo.gridutils.</code><code class="descname">summary_dse</code><span class="sig-paren">(</span><em>self</em>, <em>status</em>, <em>it</em>, <em>maxabserr</em>, <em>Ikm_true</em>, <em>E_true</em>, <em>reportmeas=False</em>, <em>reportv=True</em>, <em>reporti=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/gridutils.html#summary_dse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.gridutils.summary_dse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints a summary of the state estimation process</p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="pyvvo.gridutils.summary_lf">
-<span class="sig-prename descclassname"><span class="pre">pyvvo.gridutils.</span></span><span class="sig-name descname"><span class="pre">summary_lf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lf_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_opendss_voltages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/gridutils.html#summary_lf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyvvo.gridutils.summary_lf" title="Permalink to this definition"></a></dt>
+<dl class="function">
+<dt id="pyvvo.gridutils.summary_lf">
+<code class="descclassname">pyvvo.gridutils.</code><code class="descname">summary_lf</code><span class="sig-paren">(</span><em>self</em>, <em>lf_res=None</em>, <em>times=False</em>, <em>show_opendss_voltages=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyvvo/gridutils.html#summary_lf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyvvo.gridutils.summary_lf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a voltage report for the current power system</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lf_res</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Tuple containing convergence status of the load flow</p></li>
-<li><p><strong>times</strong> (<cite>bool</cite>, default False) – Print the timing report</p></li>
-<li><p><strong>show_opendss_voltages</strong> (<cite>bool</cite>, default False) – If True, import and print the voltage profile file generated by OpenDSS.
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lf_res</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Tuple containing convergence status of the load flow</li>
+<li><strong>times</strong> (<cite>bool</cite>, default False) – Print the timing report</li>
+<li><strong>show_opendss_voltages</strong> (<cite>bool</cite>, default False) – If True, import and print the voltage profile file generated by OpenDSS.
 A file named &lt;filename&gt;_VLN_Node.Txt should be present in the current
-folder.</p></li>
+folder.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-</section>
-<section id="module-pyvvo">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyvvo" title="Permalink to this headline"></a></h2>
-</section>
-</section>
+</div>
+<div class="section" id="module-pyvvo">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyvvo" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
 
 
            </div>
+           
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pyvvo.optimizers.html" class="btn btn-neutral float-right" title="pyvvo.optimizers package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="readme.html" class="btn btn-neutral" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
-  </div>
+    <p>
+        &copy; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0-rc.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

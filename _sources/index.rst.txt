@@ -3,22 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyvvo's documentation!
-=================================
+Welcome to PyVVO's documentation
+================================
 
-:Author: Eduardo Werley, Fillipe Vasconcelos
-:Source: https://github.com/yelrew/pyvvo
-:Issues: https://github.com/yelrew/pyvvo/issues
-:Generated: |today|
-:Version: |release|
+.. include:: readme.rst
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. The following TOC causes latexpdf to split the readme files
 
-.. readme
+.. only:: html
 
-.. include:: ../../README.rst
+   .. toctree::
+      :hidden:
+      :maxdepth: 2
+      :caption: Contents
+
+      readme
+
+
+.. include:: api.rst
 
 
 Indices and tables
@@ -27,3 +29,7 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+.. usage/tutorial
+      

@@ -1,31 +1,64 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyvvo.optimizers.pso.pso &mdash; pyvvo 0.9.5 documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <meta charset="utf-8">
   
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-    <script src="../../../../_static/js/theme.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyvvo.optimizers.pso.pso &mdash; pyvvo 1.0-rc.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
+          
+
+          
             <a href="../../../../index.html" class="icon icon-home"> pyvvo
+          
+
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -33,36 +66,93 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#quick-example">Quick example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#bugs">Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#license">License</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pyvvo.html">PyVVO API</a></li>
+</ul>
+
+            
+          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../index.html">pyvvo</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
       <li>pyvvo.optimizers.pso.pso</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <h1>Source code for pyvvo.optimizers.pso.pso</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="k">import</span> <span class="n">rand</span>
 
 <div class="viewcode-block" id="Pso"><a class="viewcode-back" href="../../../../pyvvo.optimizers.pso.html#pyvvo.optimizers.pso.pso.Pso">[docs]</a><span class="k">class</span> <span class="nc">Pso</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A Python class for the PSO optmizer</span>
@@ -77,8 +167,6 @@
 <span class="sd">        Minimum weight</span>
 <span class="sd">    wmax : `float`, by default 0.9</span>
 <span class="sd">        Maximum weight </span>
-
-<span class="sd">    **General attributes**</span>
 
 <span class="sd">    npart : `int`</span>
 <span class="sd">        Number of particles</span>
@@ -100,9 +188,42 @@
 <span class="sd">        Fitness value of the global best</span>
 <span class="sd">    gbest_fitness : `numpy.ndarray`, (itermax, 1)</span>
 <span class="sd">        Fitness value of the global best at each iteration   </span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Minimization of the Six Hump camel function.</span>
+<span class="sd">    The function has a known optimal (minimum) at (0.0898,-0.7126) and </span>
+<span class="sd">    (-0.0898,0.7126), with a function value of -1.0316,</span>
+
+<span class="sd">    &gt;&gt;&gt; from pyvvo.optimizers.pso import Pso </span>
+<span class="sd">    &gt;&gt;&gt; from pyvvo.optimizers.pso.report import fitness_plot </span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Function to be optimized </span>
+<span class="sd">    &gt;&gt;&gt; def sim_hump_camel(x): </span>
+<span class="sd">    &gt;&gt;&gt;     x1, x2 = x </span>
+<span class="sd">    &gt;&gt;&gt;     f = (4 - 2.1*x1**2 + (x1**4)/3)*x1**2 + x1*x2 + (-4 + 4*x2**2)*x2**2 </span>
+<span class="sd">    &gt;&gt;&gt;     return f</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # Define a Pso object </span>
+<span class="sd">    &gt;&gt;&gt; pso = Pso()</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # Optimize </span>
+<span class="sd">    &gt;&gt;&gt; pso.optimize( </span>
+<span class="sd">    &gt;&gt;&gt;     fitnessfunc=sim_hump_camel,  </span>
+<span class="sd">    &gt;&gt;&gt;     npart=10,  </span>
+<span class="sd">    &gt;&gt;&gt;     itermax=50,     </span>
+<span class="sd">    &gt;&gt;&gt;     xmin=[-3, -2],  </span>
+<span class="sd">    &gt;&gt;&gt;     xmax=[ 3,  2], report=True, show_progress=True </span>
+<span class="sd">    &gt;&gt;&gt;     ) </span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Print results </span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Results:&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39; Found optimal x* at ({:.5g},{:.5g})&#39;.format( pso.gbest[0], pso.gbest[1])) </span>
+<span class="sd">    &gt;&gt;&gt; print(&#39; F(x*)={:.5g}&#39;.format(pso.gbest_fitness)) </span>
+<span class="sd">    &gt;&gt;&gt; fitness_plot(pso, subtitle=&#39;Six-hump Camel Function&#39;, ylabel=&#39;F(x1,x2)&#39;)  </span>
 <span class="sd">    &quot;&quot;&quot;</span>    
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">wmin</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">wmax</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">wmin</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">wmax</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
    
         <span class="bp">self</span><span class="o">.</span><span class="n">c1</span> <span class="o">=</span> <span class="n">c1</span> <span class="c1"># Learning factor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="c1"># Global Learning factor        </span>
@@ -164,8 +285,10 @@
 <span class="sd">        vclamp : bool, by default False</span>
 <span class="sd">            If `True`, each element of the velocity vector is forced to remain between </span>
 <span class="sd">            the limits in ``vmin`` and ``vmax``.</span>
-<span class="sd">        show_progress : bool, optional</span>
-<span class="sd">            _description_, by default False</span>
+<span class="sd">        report : bool, default False</span>
+<span class="sd">            Print the PSO report, by default False            </span>
+<span class="sd">        show_progress : bool, default False</span>
+<span class="sd">            Enable the bar progress, by default False</span>
 <span class="sd">        &quot;&quot;&quot;</span>        
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fitnessfunc</span> <span class="o">=</span> <span class="n">fitnessfunc</span>
@@ -218,7 +341,7 @@
             <span class="nb">print</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">progress.bar</span> <span class="kn">import</span> <span class="n">Bar</span>
+            <span class="kn">from</span> <span class="nn">progress.bar</span> <span class="k">import</span> <span class="n">Bar</span>
             <span class="n">bar</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="s1">&#39;Optimizing&#39;</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">itermax</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(index)d</span><span class="s1">/</span><span class="si">%(max)d</span><span class="s1"> (iterations)&#39;</span><span class="p">)</span>            
 
         <span class="c1"># Main loop</span>
@@ -366,26 +489,57 @@
 </pre></div>
 
            </div>
+           
           </div>
           <footer>
+  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.</p>
-  </div>
+    <p>
+        &copy; Copyright 2022, Eduardo Werley, Fillipe M. Vasconcelos.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.0-rc.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
